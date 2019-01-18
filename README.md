@@ -2,10 +2,10 @@
 MinVoiCe is a personally tailored, bare-bones invoicing software built in C#, which has simple project and client management, minimal worktime entry UI, and easy invoice generation.
 
 
-#1.15.2019
+## 1.15.2019
 Adding table notes from initial mapping (these are all objects and DB tables):
 
-## invoice
+### invoice
 * id
 * user_id
 * start_date
@@ -13,14 +13,14 @@ Adding table notes from initial mapping (these are all objects and DB tables):
 * list<worktime_id>
 * project_id
 
-## payments_received
+### payments_received
 * id
 * date
 * amount
 * invoice_id (may need to change many-to-many?)
 * tax_withhold_percent
 
-## worktime
+### worktime
 * id
 * hours
 * date
@@ -28,13 +28,13 @@ Adding table notes from initial mapping (these are all objects and DB tables):
 * user_id
 * description
 
-## project
+### project
 * id
 * name
 * rate
 * client_id 
 
-## client
+### client
 * id
 * name
 * point_of_contact
@@ -43,7 +43,7 @@ Adding table notes from initial mapping (these are all objects and DB tables):
 * address_street
 * address_cityStateZip
 
-## user
+### user
 * id
 * name
 * title
