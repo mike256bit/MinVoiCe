@@ -2,6 +2,9 @@
 MinVoiCe is a personally tailored, bare-bones invoicing software built in C#, which has simple project and client management, minimal worktime entry UI, and easy invoice generation.
 
 
+## 1.22.2019
+Reconsidering the hour entry for weekly instead of daily. Have dates preloaded, access via dropdown. No current need for granular daily entry. 
+
 ## 1.15.2019
 Adding table notes from initial mapping (these are all objects and DB tables):
 
