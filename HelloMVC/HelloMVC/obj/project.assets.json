@@ -11800,9 +11800,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\miket\\lc101\\Unit4 - Liftoff\\MinVoiCe\\HelloMVC\\HelloMVC\\HelloMVC.csproj",
-      "projectName": "HelloMVC",
-      "projectPath": "C:\\Users\\miket\\lc101\\Unit4 - Liftoff\\MinVoiCe\\HelloMVC\\HelloMVC\\HelloMVC.csproj",
+      "projectUniqueName": "C:\\Users\\miket\\lc101\\Unit4 - Liftoff\\MinVoiCe\\HelloMVC\\HelloMVC\\MinVoiCe.csproj",
+      "projectName": "MinVoiCe",
+      "projectPath": "C:\\Users\\miket\\lc101\\Unit4 - Liftoff\\MinVoiCe\\HelloMVC\\HelloMVC\\MinVoiCe.csproj",
       "packagesPath": "C:\\Users\\miket\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\miket\\lc101\\Unit4 - Liftoff\\MinVoiCe\\HelloMVC\\HelloMVC\\obj\\",
       "projectStyle": "PackageReference",
