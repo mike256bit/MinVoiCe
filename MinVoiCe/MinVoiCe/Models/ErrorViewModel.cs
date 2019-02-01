@@ -1,6 +1,6 @@
 using System;
 
-namespace HelloMVC.Models
+namespace MinVoiCe.Models
 {
     public class ErrorViewModel
     {

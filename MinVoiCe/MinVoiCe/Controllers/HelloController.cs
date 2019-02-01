@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace HelloMVC.Controllers
+namespace MinVoiCe.Controllers
 {
     public class HelloController : Controller
     {

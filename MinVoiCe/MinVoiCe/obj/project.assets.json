@@ -11800,11 +11800,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\miket\\lc101\\Unit4 - Liftoff\\MinVoiCe\\HelloMVC\\HelloMVC\\MinVoiCe.csproj",
+      "projectUniqueName": "C:\\Users\\miket\\lc101\\Unit4 - Liftoff\\MinVoiCe\\MinVoiCe\\MinVoiCe\\MinVoiCe.csproj",
       "projectName": "MinVoiCe",
-      "projectPath": "C:\\Users\\miket\\lc101\\Unit4 - Liftoff\\MinVoiCe\\HelloMVC\\HelloMVC\\MinVoiCe.csproj",
+      "projectPath": "C:\\Users\\miket\\lc101\\Unit4 - Liftoff\\MinVoiCe\\MinVoiCe\\MinVoiCe\\MinVoiCe.csproj",
       "packagesPath": "C:\\Users\\miket\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\miket\\lc101\\Unit4 - Liftoff\\MinVoiCe\\HelloMVC\\HelloMVC\\obj\\",
+      "outputPath": "C:\\Users\\miket\\lc101\\Unit4 - Liftoff\\MinVoiCe\\MinVoiCe\\MinVoiCe\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
