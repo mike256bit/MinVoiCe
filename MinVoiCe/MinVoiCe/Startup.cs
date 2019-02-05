@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MinVoiCe.data;
 
 namespace MinVoiCe
 {
@@ -25,7 +27,7 @@ namespace MinVoiCe
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<MinVoiCeDbContext>(options =>
+            services.AddDbContext<MinvoiceDbContext>(options =>
     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.Configure<CookiePolicyOptions>(options =>
             {
