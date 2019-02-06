@@ -1,9 +1,30 @@
 ﻿@{
     ViewData["Title"] = "Dashboard";
 }
+@model List<MinVoiCe.Models.Client>
 
 <h1>Projects</h1>
 This is a list of projects. Clicking one will send the user to the individual project page, which will have info about the project and the hourly rate which applies.
+<br />
+<br />
+
+<table>
+    @if (ViewBag.Projects.Count != 0)
+
+    {
+        <tr>
+            <th style="width: 200px;">Project Name</th>
+            <th style="width: 200px;">Rate</th>
+        </tr>
+        @foreach (Project aProject in ViewBag.Projects)
+        {
+            <tr>
+                <td><a href="/Home/Project?=@aProject.ProjectId">@aProject.Name</a></td>
+                <td>@aProject.Rate</td>
+            </tr>
+        }
+    }
+</table>
 
 <hr />
 <h1>Clients</h1>
@@ -12,7 +33,7 @@ This is a list of clients. Clicking one will send the user to the individual cli
 <br />
 
 <table>
-    @if (ViewBag.Clients.Count != 0)
+    @if (Model.Count != 0)
 
     {
         <tr>
@@ -20,10 +41,10 @@ This is a list of clients. Clicking one will send the user to the individual cli
             <th style="width: 200px;">Point of Contact</th>
             <th style="width: 200px;">Phone No.</th>
         </tr>
-        @foreach (Client aClient in ViewBag.Clients)
+        @foreach (Client aClient in Model)
         {
             <tr>
-                <td>@aClient.Name</td>
+                <td><a href="/Home/Client?=@aClient.ClientId">@aClient.Name</a></td>
                 <td>@aClient.PointOfContact</td>
                 <td>@aClient.Phone</td>
             </tr>

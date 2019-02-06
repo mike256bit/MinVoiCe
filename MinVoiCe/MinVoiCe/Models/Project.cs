@@ -7,9 +7,18 @@ namespace MinVoiCe.Models
 {
     public class Project
     {
-        public int ID { get; set; }
+        private static int nextId = 1;
+        public int ProjectId { get; set; }
         public string Name { get; set; }
-        public int Rate { get; set; }
-        public Client Client { get; set; }
+        public string Description { get; set; }
+        public float Rate { get; set; }
+        //public Client Client { get; set; }
+
+        //default constructor
+        public Project()
+        {
+            ProjectId = nextId;
+            nextId++;
+        }
     }
 }

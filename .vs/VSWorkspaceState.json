@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\MinVoiCe",
+    "\\MinVoiCe\\MinVoiCe",
+    "\\MinVoiCe\\MinVoiCe\\Controllers",
+    "\\MinVoiCe\\MinVoiCe\\Views",
+    "\\MinVoiCe\\MinVoiCe\\Views\\Home"
   ],
+  "SelectedNode": "\\MinVoiCe\\MinVoiCe\\Controllers\\HomeController.cs",
   "PreviewInSolutionExplorer": false
 }

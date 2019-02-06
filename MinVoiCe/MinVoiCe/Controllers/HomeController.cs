@@ -1,22 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MinVoiCe.Models;
+using MinVoiCe.ViewModels;
 using System.Collections.Generic;
 
 namespace MinVoiCe.Controllers
 {
     public class HomeController : Controller
     {
-
-        private static List<Client> ClientList = new List<Client>();
-
         //Home/Index
         public IActionResult Index()
         {
             //Send users here upon login - this is the dashboard view
             //Display the home page, which has the short list of projects, time entries and time entry form
 
-            ViewBag.Clients = ClientList;
-            return View();
+            List<Client> Clients = ClientData.GetAll();
+
+            //ViewBag.Clients = ClientData.GetAll();
+            ViewBag.Projects = ProjectData.GetAll();
+
+            return View(Clients);
         }
 
         //Home/AddTime
@@ -28,46 +30,72 @@ namespace MinVoiCe.Controllers
             return Content("Home/Index");
         }
 
-        //Home/AddProject
+        //Send user to "add project" form
         public IActionResult AddProject()
         {
-            //When user clicks "add project" button, send them to the form page for adding a project.
-
-            return Content("Home/AddProject");
+            return View();
         }
 
-        //Home/ProjectSubmit
-        public IActionResult ProjectSubmit()
+        //Add the new project and return single project page view
+        [HttpPost]
+        public IActionResult Project(Project newProject)
         {
-            //When user fills out form and hits submit, validate the data, add the project to the project DBset and go to single project page
-
-            return Content("Home/Project?ID=##");
-        }
-
-        public IActionResult AddClient()
-        {
-            //When user clicks "add client" button, send them to the form page for adding a client.
+            ProjectData.Add(newProject);
+            ViewBag.SingleProject = newProject;
 
             return View();
         }
 
-        //Home/ClientSubmit
-        public IActionResult Client(string name, string pointOfContact, string phone, string email, string addressStreet, string addressCityZip)
+        [HttpGet]
+        public IActionResult Project(int id)
         {
-            //When user fills out form and hits submit, validate the data, add the client to the client DBset and go to single client page, which will have a list of associated projects on it
+            ViewBag.SingleProject = ProjectData.GetbyID(id);
 
-            Client NewClient = new Client {
-                Name = name,
-                PointOfContact = pointOfContact,
-                Phone = phone,
-                EMail = email,
-                AddressStreet = addressStreet,
-                AddressCityZip = addressCityZip
+            return View();
+        }
+
+        //Send user to "add client" form
+        public IActionResult AddClient()
+        {
+            AddClientViewModel addClientViewModel = new AddClientViewModel();
+
+            return View(addClientViewModel);
+        }
+
+        //Add the new client and return single client page view
+        [HttpPost]
+        public IActionResult Client(AddClientViewModel addClientViewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Client newClient = new Client
+                {
+                    Name = addClientViewModel.Name,
+                    PointOfContact = addClientViewModel.PointOfContact,
+                    Phone = addClientViewModel.Phone,
+                    EMail = addClientViewModel.EMail,
+                    AddressStreet = addClientViewModel.AddressStreet,
+                    AddressCityZip = addClientViewModel.AddressCityZip
                 };
 
-            ClientList.Add(NewClient);
-            ViewBag.SingleClient = NewClient;
-                   
+                ClientData.Add(newClient);
+                ViewBag.SingleClient = newClient;
+
+                return View();
+            }
+
+            return View("AddClient", addClientViewModel);
+            
+        }
+
+        //Single client page
+        [HttpGet]
+        public IActionResult Client(int id)
+        {
+
+            ViewBag.SingleClient = ClientData.GetbyID(id);
+
             return View();
         }
 
