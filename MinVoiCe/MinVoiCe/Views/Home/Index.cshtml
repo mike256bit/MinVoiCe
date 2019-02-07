@@ -56,6 +56,30 @@ This is a list of clients. Clicking one will send the user to the individual cli
 <h1>Time Entries</h1>
 This is a list of time entries. Time entries listed below have not been rolled into an invoice yet. 
 
+<table>
+    @if (ViewBag.Worktimes.Count != 0)
+
+    {
+    <tr>
+        <th style="width: 200px;">Date</th>
+        <th style="width: 200px;">Hours</th>
+        <th style="width: 200px;">Description</th>
+        <th style="width: 200px;">Project</th>
+    </tr>
+
+        @foreach (Worktime aWorktime in ViewBag.Worktimes)
+        {
+            <tr>
+                <td>@aWorktime.Date</td>
+                <td>@aWorktime.Hours</td>
+                <td>@aWorktime.Description</td>
+                <td>@aWorktime.Project.Name</td>
+
+            </tr>
+        }
+    }
+</table>
+
 <br />
 <br />
 <br />

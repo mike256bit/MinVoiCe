@@ -13,8 +13,7 @@ namespace MinVoiCe.Models
         public int Hours { get; set; }
         public string Date { get; set; } //date is probably going to become a date-range or WeekId
         public string Description { get; set; }
-        
-        //public IList<Project> Projects { get; set; }
+        public Project Project { get; set; }
 
         //default constructor
         public Worktime()

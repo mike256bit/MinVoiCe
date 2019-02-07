@@ -1,0 +1,17 @@
+﻿@model MinVoiCe.ViewModels.AddTimeViewModel
+
+<h1>Add Time</h1>
+<form asp-controller="Home" asp-action="Worktime" method="Post">
+
+    <div asp-validation-summary="All"></div>
+
+    Hours <input asp-for="Hours" /><br />
+    Date <input asp-for="Date" /><br />
+    Description <textarea asp-for="Description"></textarea><br />
+    Project<br />
+    <select asp-for="ProjectId" asp-items="Model.SelectProjects"></select>
+
+    <input type="submit" value="Add Time" />
+
+
+</form>

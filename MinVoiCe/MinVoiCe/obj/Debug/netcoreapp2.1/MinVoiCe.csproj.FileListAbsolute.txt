@@ -34,3 +34,4 @@ C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcor
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Home\Client.g.cshtml.cs
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Home\AddProject.g.cshtml.cs
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Home\Project.g.cshtml.cs
+C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Home\AddTime.g.cshtml.cs

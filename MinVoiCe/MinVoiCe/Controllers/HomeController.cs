@@ -17,6 +17,7 @@ namespace MinVoiCe.Controllers
 
             //ViewBag.Clients = ClientData.GetAll();
             ViewBag.Projects = ProjectData.GetAll();
+            ViewBag.Worktimes = WorktimeData.GetAll();
 
             return View(Clients);
         }
@@ -24,10 +25,31 @@ namespace MinVoiCe.Controllers
         //Home/AddTime
         public IActionResult AddTime()
         {
-            //When users hit the add time button, take the form data, validate it, and add it to the worktime DBset
-            //Redirect to the dashboard
+            AddTimeViewModel addTimeViewModel = new AddTimeViewModel();
+            
+            return View(addTimeViewModel);
+        }
 
-            return Content("Home/Index");
+        [HttpPost]
+        public IActionResult Worktime(AddTimeViewModel addTimeViewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Worktime newWorktime = new Worktime
+                {
+                    Hours = addTimeViewModel.Hours,
+                    Date = addTimeViewModel.Date,
+                    Description = addTimeViewModel.Description
+                };
+
+                newWorktime.Project = ProjectData.GetbyID(addTimeViewModel.ProjectId);
+                WorktimeData.Add(newWorktime);
+
+                return Redirect("/");
+            }
+
+            return View("Addtime", addTimeViewModel);
         }
 
         //Send user to "add project" form
