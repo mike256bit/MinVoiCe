@@ -1,0 +1,32 @@
+﻿@model MinVoiCe.Models.Invoice
+
+
+Client: @Model.Project.Client.Name<br />
+Project: @Model.Project.Name<br />
+Hourly rate: @Model.Project.Rate<br />
+
+
+Worktimes:<br />
+
+
+<table>
+
+    <tr>
+        <th style="width: 200px;">Date</th>
+        <th style="width: 200px;">Hours</th>
+        <th style="width: 200px;">Description</th>
+    </tr>
+
+    @foreach (Worktime aWorktime in Model.Worktimes)
+    {
+        <tr>
+            <td>@aWorktime.Date</td>
+            <td>@aWorktime.Hours</td>
+            <td>@aWorktime.Description</td>
+        </tr>
+    }
+
+</table>
+<br />
+
+<strong>Total Sum: @Model.TotalAmount</strong>

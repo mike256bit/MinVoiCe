@@ -21,5 +21,10 @@ namespace MinVoiCe.Models
         {
             worktimeList.Add(newWorktime);
         }
+
+        public static Worktime GetbyID(int id)
+        {
+            return worktimeList.Single(x => x.WorktimeId == id);
+        }
     }
 }

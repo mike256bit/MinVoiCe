@@ -3,30 +3,8 @@
 }
 @model List<MinVoiCe.Models.Client>
 
-<h1>Projects</h1>
-This is a list of projects. Clicking one will send the user to the individual project page, which will have info about the project and the hourly rate which applies.
-<br />
-<br />
 
-<table>
-    @if (ViewBag.Projects.Count != 0)
 
-    {
-        <tr>
-            <th style="width: 200px;">Project Name</th>
-            <th style="width: 200px;">Rate</th>
-        </tr>
-        @foreach (Project aProject in ViewBag.Projects)
-        {
-            <tr>
-                <td><a href="/Home/Project?=@aProject.ProjectId">@aProject.Name</a></td>
-                <td>@aProject.Rate</td>
-            </tr>
-        }
-    }
-</table>
-
-<hr />
 <h1>Clients</h1>
 This is a list of clients. Clicking one will send the user to the individual client page, which will have info about the client, address, POC, and a list of projects associated with that client.
 <br />
@@ -44,7 +22,7 @@ This is a list of clients. Clicking one will send the user to the individual cli
         @foreach (Client aClient in Model)
         {
             <tr>
-                <td><a href="/Home/Client?=@aClient.ClientId">@aClient.Name</a></td>
+                <td><a asp-controller="Client" asp-action="Client" asp-route-id="@aClient.ClientId">@aClient.Name</a></td>
                 <td>@aClient.PointOfContact</td>
                 <td>@aClient.Phone</td>
             </tr>
@@ -53,19 +31,45 @@ This is a list of clients. Clicking one will send the user to the individual cli
 </table>
 
 <hr />
+<h1>Projects</h1>
+This is a list of projects. Clicking one will send the user to the individual project page, which will have info about the project and the hourly rate which applies.
+<br />
+<br />
+
+<table>
+    @if (ViewBag.Projects.Count != 0)
+
+    {
+        <tr>
+            <th style="width: 200px;">Project Name</th>
+            <th style="width: 200px;">Rate</th>
+        </tr>
+        @foreach (Project aProject in ViewBag.Projects)
+        {
+            <tr>
+                <td><a href="/Project/Project?=@aProject.ProjectId">@aProject.Name</a></td>
+                <td>@aProject.Rate</td>
+            </tr>
+        }
+    }
+</table>
+
+<hr />
 <h1>Time Entries</h1>
-This is a list of time entries. Time entries listed below have not been rolled into an invoice yet. 
+This is a list of time entries. Time entries listed below have not been rolled into an invoice yet.
+<br />
+<br />
 
 <table>
     @if (ViewBag.Worktimes.Count != 0)
 
     {
-    <tr>
-        <th style="width: 200px;">Date</th>
-        <th style="width: 200px;">Hours</th>
-        <th style="width: 200px;">Description</th>
-        <th style="width: 200px;">Project</th>
-    </tr>
+        <tr>
+            <th style="width: 200px;">Date</th>
+            <th style="width: 200px;">Hours</th>
+            <th style="width: 200px;">Description</th>
+            <th style="width: 200px;">Project</th>
+        </tr>
 
         @foreach (Worktime aWorktime in ViewBag.Worktimes)
         {

@@ -4,10 +4,11 @@
     "\\MinVoiCe",
     "\\MinVoiCe\\MinVoiCe",
     "\\MinVoiCe\\MinVoiCe\\Controllers",
+    "\\MinVoiCe\\MinVoiCe\\Models",
     "\\MinVoiCe\\MinVoiCe\\ViewModels",
     "\\MinVoiCe\\MinVoiCe\\Views",
     "\\MinVoiCe\\MinVoiCe\\Views\\Home"
   ],
-  "SelectedNode": "\\MinVoiCe\\MinVoiCe\\ViewModels\\AddClientViewModel.cs",
+  "SelectedNode": "\\MinVoiCe\\MinVoiCe\\Views\\Home\\AddClient.cshtml",
   "PreviewInSolutionExplorer": false
 }

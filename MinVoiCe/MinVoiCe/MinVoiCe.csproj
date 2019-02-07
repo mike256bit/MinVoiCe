@@ -10,10 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Home\AddProject.cshtml">
+    <Content Update="Views\Project\AddProject.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Home\Project.cshtml">
+    <Content Update="Views\Project\Project.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

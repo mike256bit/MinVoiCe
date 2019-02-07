@@ -1,0 +1,16 @@
+﻿@model MinVoiCe.ViewModels.InvoiceViewModel
+
+
+<h1>Create an Invoice</h1>
+
+<form asp-controller="Home" asp-action="ConfirmInvoice" method="post">
+
+    <div asp-validation-summary="All"></div>
+
+    Create an invoice using worktimes for the selected project:<br />
+    <select asp-for="ProjectId" asp-items="Model.SelectProjects"></select>
+
+    <input type="submit" value="Create Invoice" />
+
+
+</form>

@@ -10,9 +10,7 @@ namespace MinVoiCe.Controllers
         //Home/Index
         public IActionResult Index()
         {
-            //Send users here upon login - this is the dashboard view
-            //Display the home page, which has the short list of projects, time entries and time entry form
-
+            //refactor to include other items and pull them from viewbag
             List<Client> Clients = ClientData.GetAll();
 
             //ViewBag.Clients = ClientData.GetAll();
@@ -52,90 +50,50 @@ namespace MinVoiCe.Controllers
             return View("Addtime", addTimeViewModel);
         }
 
-        //Send user to "add project" form
-        public IActionResult AddProject()
+        public IActionResult Invoice()
         {
-            AddProjectViewModel addProjectViewModel = new AddProjectViewModel();
+            InvoiceViewModel invoiceViewModel = new InvoiceViewModel();
 
-            return View(addProjectViewModel);
+            if (string.IsNullOrEmpty(invoiceViewModel.ProjectId.ToString()))
+            {
+                return Redirect("/");
+            }
+
+            return View(invoiceViewModel);
         }
 
-        //Add the new project and return single project page view
         [HttpPost]
-        public IActionResult Project(AddProjectViewModel addProjectViewModel)
+        public IActionResult ConfirmInvoice(InvoiceViewModel invoiceViewModel)
         {
 
             if (ModelState.IsValid)
             {
-                Project newProject = new Project
+                List<Worktime> ProjectWorktimes = new List<Worktime>();
+
+                foreach (Worktime aWorktime in WorktimeData.GetAll())
                 {
-                    Name = addProjectViewModel.Name,
-                    Description = addProjectViewModel.Description,
-                    Rate = addProjectViewModel.Rate,
-                };
+                    if (aWorktime.Project.ProjectId == invoiceViewModel.ProjectId)
+                    {
+                        ProjectWorktimes.Add(aWorktime);
+                    }
+                }
 
-                newProject.Client = ClientData.GetbyID(addProjectViewModel.ClientId);
+                if (ProjectWorktimes.Count == 0)
+                {
+                    return Redirect("/");
+                }
 
-                ProjectData.Add(newProject);
-                ViewBag.SingleProject = newProject;
+                Invoice newInvoice = new Invoice();
 
-                return View();
+                newInvoice.Worktimes = ProjectWorktimes;
+                newInvoice.Project = ProjectData.GetbyID(invoiceViewModel.ProjectId);
+                newInvoice.Total();
+
+                return View(newInvoice);
+
             }
 
-            return View("AddProject", addProjectViewModel);
-        }
-
-        [HttpGet]
-        public IActionResult Project(int id)
-        {
-            ViewBag.SingleProject = ProjectData.GetbyID(id);
-
-            return View();
-        }
-
-        //Send user to "add client" form
-        public IActionResult AddClient()
-        {
-            AddClientViewModel addClientViewModel = new AddClientViewModel();
-
-            return View(addClientViewModel);
-        }
-
-        //Add the new client and return single client page view
-        [HttpPost]
-        public IActionResult Client(AddClientViewModel addClientViewModel)
-        {
-
-            if (ModelState.IsValid)
-            {
-                Client newClient = new Client
-                {
-                    Name = addClientViewModel.Name,
-                    PointOfContact = addClientViewModel.PointOfContact,
-                    Phone = addClientViewModel.Phone,
-                    EMail = addClientViewModel.EMail,
-                    AddressStreet = addClientViewModel.AddressStreet,
-                    AddressCityZip = addClientViewModel.AddressCityZip
-                };
-
-                ClientData.Add(newClient);
-                ViewBag.SingleClient = newClient;
-
-                return View();
-            }
-
-            return View("AddClient", addClientViewModel);
-            
-        }
-
-        //Single client page
-        [HttpGet]
-        public IActionResult Client(int id)
-        {
-
-            ViewBag.SingleClient = ClientData.GetbyID(id);
-
-            return View();
+            return View("Invoice", invoiceViewModel);
         }
 
     }
