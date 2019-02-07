@@ -12,7 +12,7 @@ namespace MinVoiCe.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public float Rate { get; set; }
-        //public Client Client { get; set; }
+        public Client Client { get; set; }
 
         //default constructor
         public Project()

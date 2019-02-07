@@ -33,17 +33,34 @@ namespace MinVoiCe.Controllers
         //Send user to "add project" form
         public IActionResult AddProject()
         {
-            return View();
+            AddProjectViewModel addProjectViewModel = new AddProjectViewModel();
+
+            return View(addProjectViewModel);
         }
 
         //Add the new project and return single project page view
         [HttpPost]
-        public IActionResult Project(Project newProject)
+        public IActionResult Project(AddProjectViewModel addProjectViewModel)
         {
-            ProjectData.Add(newProject);
-            ViewBag.SingleProject = newProject;
 
-            return View();
+            if (ModelState.IsValid)
+            {
+                Project newProject = new Project
+                {
+                    Name = addProjectViewModel.Name,
+                    Description = addProjectViewModel.Description,
+                    Rate = addProjectViewModel.Rate,
+                };
+
+                newProject.Client = ClientData.GetbyID(addProjectViewModel.ClientId);
+
+                ProjectData.Add(newProject);
+                ViewBag.SingleProject = newProject;
+
+                return View();
+            }
+
+            return View("AddProject", addProjectViewModel);
         }
 
         [HttpGet]

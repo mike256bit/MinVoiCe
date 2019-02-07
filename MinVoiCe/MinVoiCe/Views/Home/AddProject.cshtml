@@ -1,12 +1,16 @@
-﻿
+﻿@model MinVoiCe.ViewModels.AddProjectViewModel
 
 <h1>Add Project</h1>
 
 <form asp-controller="Home" asp-action="Project" method="post">
 
-    Name <input name="Name" type="text" /><br />
-    Rate <input name="Rate" type="text" /><br />
-    Description<br /> <textarea name="Description" type="text"></textarea><br />
+    <div asp-validation-summary="All"></div>
+
+    Name <input asp-for="Name"><br />
+    Rate <input asp-for="Rate"><br />
+    Description<br /> <textarea asp-for="Description"></textarea><br />
+    Client<br />
+    <select asp-for="ClientId" asp-items="Model.SelectClients"></select>
 
     <input type="submit" value="Add Project" />
 
