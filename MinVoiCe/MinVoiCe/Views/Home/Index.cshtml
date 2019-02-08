@@ -3,7 +3,9 @@
 }
 @model List<MinVoiCe.Models.Client>
 
-
+<form asp-controller="Home" asp-action="Dashboard">
+    Select Project Dashboard: <select asp-items="ViewBag.SelectProjects"></select><input type="submit" value="Change Project" />
+</form>
 
 <h1>Clients</h1>
 This is a list of clients. Clicking one will send the user to the individual client page, which will have info about the client, address, POC, and a list of projects associated with that client.

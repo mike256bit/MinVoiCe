@@ -8,16 +8,35 @@ namespace MinVoiCe.Controllers
     public class HomeController : Controller
     {
         //Home/Index
-        public IActionResult Index()
+        public IActionResult Index(int id = 0)
         {
+            if (ClientData.IsLoaded == false)
+            {
+                ClientData.LoadClients();
+            };
+
             //refactor to include other items and pull them from viewbag
             List<Client> Clients = ClientData.GetAll();
-
-            //ViewBag.Clients = ClientData.GetAll();
             ViewBag.Projects = ProjectData.GetAll();
-            ViewBag.Worktimes = WorktimeData.GetAll();
+            ViewBag.SelectProjects = ProjectData.SelectProjects();
+            
+            if (id == 0)
+            {
+                ViewBag.Worktimes = WorktimeData.GetAll();
+            }
+
+            else
+            {
+                ViewBag.Worktimes = WorktimeData.GetbyProjectID(id);
+            }
 
             return View(Clients);
+        }
+
+        //Dashboard Change
+        public IActionResult Dashboard(int ProjectId)
+        {
+            return Redirect("/Index?=" + ProjectId);
         }
 
         //Home/AddTime
@@ -68,15 +87,15 @@ namespace MinVoiCe.Controllers
 
             if (ModelState.IsValid)
             {
-                List<Worktime> ProjectWorktimes = new List<Worktime>();
+                List<Worktime> ProjectWorktimes = WorktimeData.GetbyProjectID(invoiceViewModel.ProjectId);
 
-                foreach (Worktime aWorktime in WorktimeData.GetAll())
-                {
-                    if (aWorktime.Project.ProjectId == invoiceViewModel.ProjectId)
-                    {
-                        ProjectWorktimes.Add(aWorktime);
-                    }
-                }
+                //foreach (Worktime aWorktime in WorktimeData.GetAll())
+                //{
+                //    if (aWorktime.Project.ProjectId == invoiceViewModel.ProjectId)
+                //    {
+                //        ProjectWorktimes.Add(aWorktime);
+                //    }
+                //}
 
                 if (ProjectWorktimes.Count == 0)
                 {

@@ -22,9 +22,26 @@ namespace MinVoiCe.Models
             worktimeList.Add(newWorktime);
         }
 
+        //Get by ID
         public static Worktime GetbyID(int id)
         {
             return worktimeList.Single(x => x.WorktimeId == id);
+        }
+
+        //Get by Project ID
+        public static List<Worktime> GetbyProjectID(int id)
+        {
+            List<Worktime> ProjectWorktimes = new List<Worktime>();
+
+            foreach(Worktime aWorktime in WorktimeData.GetAll())
+            {
+                if (aWorktime.Project.ProjectId == id)
+                {
+                    ProjectWorktimes.Add(aWorktime);
+                }
+            }
+
+            return ProjectWorktimes;
         }
     }
 }

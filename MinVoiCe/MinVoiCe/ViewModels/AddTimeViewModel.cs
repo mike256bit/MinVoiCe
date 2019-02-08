@@ -22,17 +22,8 @@ namespace MinVoiCe.ViewModels
         //Constructor
         public AddTimeViewModel()
         {
-            List<Project> Projects = ProjectData.GetAll();
-            SelectProjects = new List<SelectListItem>();
 
-            foreach (Project aProject in Projects)
-            {
-                SelectProjects.Add(new SelectListItem
-                {
-                    Value = aProject.ProjectId.ToString(),
-                    Text = aProject.Name
-                });
-            }
+            SelectProjects = ProjectData.SelectProjects();
 
         }
 
