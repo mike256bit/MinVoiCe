@@ -10,6 +10,7 @@ namespace MinVoiCe.Models
     {
 
         private static List<Project> projectList = new List<Project>();
+        public static bool IsLoaded = false;
 
         //GetAll
         public static List<Project> GetAll()
@@ -45,6 +46,34 @@ namespace MinVoiCe.Models
 
             return SelectProjects;
 
+        }
+
+        //Load Dummy Projects:
+        public static void LoadProjects()
+        {
+            if (ClientData.IsLoaded)
+            {
+                Project projdummy1 = new Project
+                {
+                    Name = "Smart Tackle Box",
+                    Description = "Bluetooth enabled self-organizing tackle box for different kinds of fishing environments.",
+                    Rate = 50.00F,
+                    Client = ClientData.GetbyID(1)
+                };
+
+                Project projdummy2 = new Project
+                {
+                    Name = "SuperSonic Reel",
+                    Description = "Ultrafast reel which using a collapsing black hole to draw in the line.",
+                    Rate = 110.00F,
+                    Client = ClientData.GetbyID(1)
+                };
+
+                projectList.Add(projdummy1);
+                projectList.Add(projdummy2);
+                IsLoaded = true;
+            }
+           
         }
     }
 }

@@ -8,35 +8,45 @@ namespace MinVoiCe.Controllers
     public class HomeController : Controller
     {
         //Home/Index
-        public IActionResult Index(int id = 0)
+        public IActionResult Index(int id)
         {
             if (ClientData.IsLoaded == false)
             {
                 ClientData.LoadClients();
             };
 
+            if (ProjectData.IsLoaded == false)
+            {
+                ProjectData.LoadProjects();
+            }
+
+            DashboardViewModel dashboardViewModel = new DashboardViewModel();
+
             //refactor to include other items and pull them from viewbag
-            List<Client> Clients = ClientData.GetAll();
-            ViewBag.Projects = ProjectData.GetAll();
-            ViewBag.SelectProjects = ProjectData.SelectProjects();
+            dashboardViewModel.Clients = ClientData.GetAll();
+            dashboardViewModel.Projects = ProjectData.GetAll();
             
             if (id == 0)
             {
-                ViewBag.Worktimes = WorktimeData.GetAll();
+                dashboardViewModel.Worktimes = WorktimeData.GetAll();
+                dashboardViewModel.CurrentProject = "Showing all Projects";
             }
 
             else
             {
-                ViewBag.Worktimes = WorktimeData.GetbyProjectID(id);
+                dashboardViewModel.Worktimes = WorktimeData.GetbyProjectID(id);
+                dashboardViewModel.CurrentProject = ProjectData.GetbyID(id).Name;
             }
 
-            return View(Clients);
+            return View(dashboardViewModel);
         }
 
         //Dashboard Change
-        public IActionResult Dashboard(int ProjectId)
+      
+        [HttpPost]
+        public IActionResult Dashboard(DashboardViewModel dashboardViewModel)
         {
-            return Redirect("/Index?=" + ProjectId);
+            return Redirect("/?id=" + dashboardViewModel.ProjectId);
         }
 
         //Home/AddTime
