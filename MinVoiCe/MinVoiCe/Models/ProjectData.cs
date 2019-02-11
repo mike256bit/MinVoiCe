@@ -59,7 +59,7 @@ namespace MinVoiCe.Models
                     {
                         Value = aProject.ProjectId.ToString(),
                         Text = aProject.Name,
-                        Selected = (aProject.ProjectId == id)
+                        //Selected = (aProject.ProjectId == id)
                     });
                           
             }

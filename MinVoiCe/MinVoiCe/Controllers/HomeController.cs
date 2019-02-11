@@ -13,6 +13,8 @@ namespace MinVoiCe.Controllers
             if (ClientData.IsLoaded == false)
             {
                 ClientData.LoadClients();
+                WeekNumber.WeekGenerator();
+
             };
 
             if (ProjectData.IsLoaded == false)

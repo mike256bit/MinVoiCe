@@ -10,26 +10,28 @@ namespace MinVoiCe.ViewModels
     public class DashboardViewModel
     {
         public int ProjectId { get; set; }
+        public int WeekId { get; set; }
 
         public List<Client> Clients { get; set; }
         public List<Project> Projects { get; set; }
         public List<Worktime> Worktimes { get; set; }
-        public string CurrentProject { get; set; }
+
+        //For dashboard view
         public string DashboardTitle { get; set; }
-
-        public int Hours { get; set; }
-
-        public string Date { get; set; }
-        public string Description { get; set; }
-
         public List<SelectListItem> SelectProjects { get; set; }
 
-        //Constructor
+        //For Adding Time
+        public int Hours { get; set; }
+        public string Description { get; set; }
+        public List<SelectListItem> SelectWeeks { get; set; }
+
+        //Default Constructor
         public DashboardViewModel()
         {
 
             SelectProjects = ProjectData.SelectProjects();
             DashboardTitle = "All Projects";
+            SelectWeeks = WeekNumber.SelectWeeks();
 
         }
 
@@ -38,6 +40,8 @@ namespace MinVoiCe.ViewModels
 
             SelectProjects = ProjectData.SelectProjects(id);
             ProjectId = id;
+            SelectWeeks = WeekNumber.SelectWeeks();
+            WeekId = WeekNumber.CurrentWeek;
         }
     }
 }

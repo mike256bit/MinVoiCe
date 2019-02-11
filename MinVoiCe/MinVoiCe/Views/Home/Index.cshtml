@@ -28,7 +28,7 @@
                 <table style="width: 100%;">
                     <tr>
                         <td style="width: 180px;">Change Project Dashboard:</td>
-                        <td> <select asp-for="ProjectId" asp-items="Model.SelectProjects" style="width: 100%;"></select> </td>
+                        <td><select asp-for="ProjectId" asp-items="Model.SelectProjects" style="width: 100%;"></select></td>
                         <td style="width: 40px;"><input style="width: 100%;" type="submit" value="Go" /></td>
                     </tr>
                 </table>
@@ -48,7 +48,7 @@
                         <td>Hours</td>
                         <td><input asp-for="Hours" /></td>
                         <td>Date</td>
-                        <td><input style="width: 100%;" asp-for="Date" /></td>
+                        <td><select asp-for="WeekId" asp-items="Model.SelectWeeks" style="width: 100%;"></select></td>
                     </tr>
                     <tr>
                         <td style="vertical-align:top;">Description</td>
