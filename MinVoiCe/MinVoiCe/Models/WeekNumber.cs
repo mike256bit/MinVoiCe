@@ -8,7 +8,7 @@ namespace MinVoiCe.Models
 {
     public class WeekNumber
     {
-        private static Dictionary<int, string> WeekDict = new Dictionary<int, string>();
+        public static Dictionary<int, string> WeekDict = new Dictionary<int, string>();
         public static int CurrentWeek = 0;
 
         //Generate weeks -- this should be it's own DB maybe? Naw.

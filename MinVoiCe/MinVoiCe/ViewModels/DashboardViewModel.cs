@@ -2,6 +2,7 @@
 using MinVoiCe.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,8 +22,13 @@ namespace MinVoiCe.ViewModels
         public List<SelectListItem> SelectProjects { get; set; }
 
         //For Adding Time
-        public int Hours { get; set; }
+        [Required]
+        [Range(.5, 100)]
+        public double Hours { get; set; }
+
+        [Required]
         public string Description { get; set; }
+
         public List<SelectListItem> SelectWeeks { get; set; }
 
         //Default Constructor

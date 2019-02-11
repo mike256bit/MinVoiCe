@@ -10,10 +10,11 @@ namespace MinVoiCe.Models
 
         private static int nextId = 1;
         public int WorktimeId { get; set; }
-        public int Hours { get; set; }
-        public string Date { get; set; } //date is probably going to become a date-range or WeekId
+        public double Hours { get; set; }
+        public string WeekRange { get; set; }
         public string Description { get; set; }
         public Project Project { get; set; }
+        public double Amount { get; set; }
 
         //default constructor
         public Worktime()

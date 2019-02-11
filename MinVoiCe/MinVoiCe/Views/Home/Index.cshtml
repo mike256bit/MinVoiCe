@@ -27,9 +27,9 @@
             <form asp-controller="Home" asp-action="Dashboard" method="post">
                 <table style="width: 100%;">
                     <tr>
-                        <td style="width: 180px;">Change Project Dashboard:</td>
+                        <td style="width:140px;">Change Dashboard:</td>
                         <td><select asp-for="ProjectId" asp-items="Model.SelectProjects" style="width: 100%;"></select></td>
-                        <td style="width: 40px;"><input style="width: 100%;" type="submit" value="Go" /></td>
+                        <td style="width: 50px;"><input style="width: 100%;" type="submit" value="Go" /></td>
                     </tr>
                 </table>
             </form>
@@ -38,15 +38,16 @@
 
         @if (Model.ProjectId != 0)
         {
-        <div class="worktime">
+        <div class="worktime" style="border-bottom: 1px solid green; height: 180px;">
             <h3>Add Time:</h3>
-            <form asp-controller="Home" asp-action="Worktime" method="Post">
+            <div asp-validation-summary="All"></div>
+            <form asp-controller="Home" asp-action="DashWorktime" method="Post">
 
                 <div asp-validation-summary="All"></div>
-                <table style="border-bottom: 1px solid green; width: 100%;">
+                <table style="width: 100%;">
                     <tr>
                         <td>Hours</td>
-                        <td><input asp-for="Hours" /></td>
+                        <td><input asp-for="Hours" style="width: 60px;"></td>
                         <td>Date</td>
                         <td><select asp-for="WeekId" asp-items="Model.SelectWeeks" style="width: 100%;"></select></td>
                     </tr>
@@ -54,14 +55,9 @@
                         <td style="vertical-align:top;">Description</td>
                         <td colspan="3"><textarea asp-for="Description" style="width: 100%; height: 40px;"></textarea></td>
                     </tr>
-                    <tr>
-                        <td colspan="4">
-                            <input asp-for="ProjectId" type="hidden" />
-                            <input class="okay" type="submit" value="+" />
-                        </td>
-                    </tr>
                 </table>
-
+                <input asp-for="ProjectId" type="hidden"/>
+                <button class="okay" type="submit">+</button>
             </form>
         </div>
         }
@@ -70,13 +66,14 @@
             <h3>Time Entries:</h3>
             Currently unappended time entries.
             <br />
+            <br />
 
             <table>
                 @if (Model.Worktimes.Count != 0)
 
                 {
                     <tr>
-                        <th style="width: 200px;">Date</th>
+                        <th style="width: 200px;">Dates</th>
                         <th style="width: 200px;">Hours</th>
                         <th style="width: 200px;">Description</th>
                         <th style="width: 200px;">Project</th>
@@ -85,7 +82,7 @@
                     @foreach (Worktime aWorktime in Model.Worktimes)
                     {
                         <tr>
-                            <td>@aWorktime.Date</td>
+                            <td>@aWorktime.WeekRange</td>
                             <td>@aWorktime.Hours</td>
                             <td>@aWorktime.Description</td>
                             <td>@aWorktime.Project.Name</td>

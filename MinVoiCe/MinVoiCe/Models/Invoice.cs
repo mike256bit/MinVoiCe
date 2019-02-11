@@ -12,25 +12,23 @@ namespace MinVoiCe.Models
         public int InvoiceId { get; set; }
         public List<Worktime> Worktimes { get; set; }
         public Project Project { get; set; }
-        public float TotalAmount { get; set; }
-       
+        public double TotalAmount { get; set; }
+        public string CurrentDate { get; set; }
+
         //default constructor
         public Invoice()
         {
             InvoiceId = nextId;
             nextId++;
+            CurrentDate = DateTime.Today.ToString("d");
         }
 
         public void Total()
         {
-            int HoursSum = 0;
             foreach (Worktime aWorktime in Worktimes)
             {
-                HoursSum += aWorktime.Hours;
+                TotalAmount += aWorktime.Amount;
             }
-
-            TotalAmount = HoursSum * Project.Rate;
-
         }
     }
 }

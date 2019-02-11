@@ -10,11 +10,11 @@ namespace MinVoiCe.Controllers
         //Home/Index
         public IActionResult Index(int id)
         {
+
             if (ClientData.IsLoaded == false)
             {
                 ClientData.LoadClients();
                 WeekNumber.WeekGenerator();
-
             };
 
             if (ProjectData.IsLoaded == false)
@@ -24,7 +24,6 @@ namespace MinVoiCe.Controllers
 
             DashboardViewModel dashboardViewModel = new DashboardViewModel(id);
 
-            //refactor to include other items and pull them from viewbag
             dashboardViewModel.Clients = ClientData.GetAll();
             dashboardViewModel.Projects = ProjectData.GetAll();
 
@@ -33,9 +32,7 @@ namespace MinVoiCe.Controllers
             {
                 dashboardViewModel.Worktimes = WorktimeData.GetbyProjectID(id);
                 dashboardViewModel.DashboardTitle = ProjectData.GetbyID(id).Name;
-
             }
-
             else
             {
                 dashboardViewModel.Worktimes = WorktimeData.GetAll();
@@ -46,7 +43,6 @@ namespace MinVoiCe.Controllers
         }
 
         //Dashboard Change
-      
         [HttpPost]
         public IActionResult Dashboard(DashboardViewModel dashboardViewModel)
         {
@@ -59,12 +55,45 @@ namespace MinVoiCe.Controllers
         }
 
         //Home/AddTime
+
+
         public IActionResult AddTime()
         {
             AddTimeViewModel addTimeViewModel = new AddTimeViewModel();
-            
+
             return View(addTimeViewModel);
         }
+
+        [HttpPost]
+        public IActionResult DashWorkTime(DashboardViewModel dashboardViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Worktime newWorktime = new Worktime
+                {
+                    Hours = dashboardViewModel.Hours,
+                    WeekRange = WeekNumber.WeekDict[dashboardViewModel.WeekId],
+                    Description = dashboardViewModel.Description
+                };
+
+                newWorktime.Project = ProjectData.GetbyID(dashboardViewModel.ProjectId);
+                newWorktime.Amount = newWorktime.Hours * (double)newWorktime.Project.Rate;
+                WorktimeData.Add(newWorktime);
+
+                return Redirect("/?id=" + dashboardViewModel.ProjectId);
+            }
+
+            AddTimeViewModel addTimeViewModel = new AddTimeViewModel
+            {
+                Hours = dashboardViewModel.Hours,
+                WeekId = dashboardViewModel.WeekId,
+                Description = dashboardViewModel.Description,
+                ProjectId = dashboardViewModel.ProjectId
+            };
+
+            return View("Addtime", addTimeViewModel);
+        }
+    
 
         [HttpPost]
         public IActionResult Worktime(AddTimeViewModel addTimeViewModel)
@@ -75,12 +104,14 @@ namespace MinVoiCe.Controllers
                 Worktime newWorktime = new Worktime
                 {
                     Hours = addTimeViewModel.Hours,
-                    Date = addTimeViewModel.Date,
+                    WeekRange = WeekNumber.WeekDict[addTimeViewModel.WeekId],
                     Description = addTimeViewModel.Description
                 };
 
                 newWorktime.Project = ProjectData.GetbyID(addTimeViewModel.ProjectId);
+                newWorktime.Amount = newWorktime.Hours * (double)newWorktime.Project.Rate;
                 WorktimeData.Add(newWorktime);
+
 
                 return Redirect("/?id="+addTimeViewModel.ProjectId);
             }
@@ -107,14 +138,6 @@ namespace MinVoiCe.Controllers
             if (ModelState.IsValid)
             {
                 List<Worktime> ProjectWorktimes = WorktimeData.GetbyProjectID(invoiceViewModel.ProjectId);
-
-                //foreach (Worktime aWorktime in WorktimeData.GetAll())
-                //{
-                //    if (aWorktime.Project.ProjectId == invoiceViewModel.ProjectId)
-                //    {
-                //        ProjectWorktimes.Add(aWorktime);
-                //    }
-                //}
 
                 if (ProjectWorktimes.Count == 0)
                 {

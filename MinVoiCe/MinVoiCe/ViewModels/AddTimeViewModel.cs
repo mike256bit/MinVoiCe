@@ -11,19 +11,24 @@ namespace MinVoiCe.ViewModels
     public class AddTimeViewModel
     {
         [Required]
-        public int Hours { get; set; }
+        [Range(.5, 100)]
+        public double Hours { get; set; }
 
-        public string Date { get; set; }
+        public int WeekId { get; set; }
+        [Required]
         public string Description { get; set; }
         public int ProjectId { get; set; }
 
         public List<SelectListItem> SelectProjects { get; set; }
+        public List<SelectListItem> SelectWeeks { get; set; }
 
         //Constructor
         public AddTimeViewModel()
         {
 
             SelectProjects = ProjectData.SelectProjects();
+            SelectWeeks = WeekNumber.SelectWeeks();
+            WeekId = WeekNumber.CurrentWeek;
 
         }
 
