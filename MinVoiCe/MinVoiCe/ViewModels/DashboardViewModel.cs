@@ -15,7 +15,13 @@ namespace MinVoiCe.ViewModels
         public List<Project> Projects { get; set; }
         public List<Worktime> Worktimes { get; set; }
         public string CurrentProject { get; set; }
-        
+        public string DashboardTitle { get; set; }
+
+        public int Hours { get; set; }
+
+        public string Date { get; set; }
+        public string Description { get; set; }
+
         public List<SelectListItem> SelectProjects { get; set; }
 
         //Constructor
@@ -23,7 +29,15 @@ namespace MinVoiCe.ViewModels
         {
 
             SelectProjects = ProjectData.SelectProjects();
+            DashboardTitle = "All Projects";
 
+        }
+
+        public DashboardViewModel (int id)
+        {
+
+            SelectProjects = ProjectData.SelectProjects(id);
+            ProjectId = id;
         }
     }
 }

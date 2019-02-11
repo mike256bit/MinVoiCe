@@ -15,6 +15,7 @@ namespace MinVoiCe.Controllers
         public IActionResult AddClient()
         {
             AddClientViewModel addClientViewModel = new AddClientViewModel();
+            addClientViewModel.Clients = ClientData.GetAll();
 
             return View(addClientViewModel);
         }

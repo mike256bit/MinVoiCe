@@ -16,3 +16,31 @@
     <input type="submit" value="Add Client" />
 
 </form>
+
+<h1>Clients</h1>
+        This is a list of clients. Clicking one will send the user to the individual client page, which will have info about the client, address, POC, and a list of projects associated with that client.
+<br />
+<br />
+<hr />
+
+<table>
+    @if (Model.Clients.Count != 0)
+
+    {
+        <tr>
+            <th style="width: 200px;">Client Name</th>
+            <th style="width: 200px;">Point of Contact</th>
+            <th style="width: 200px;">Phone No.</th>
+        </tr>
+        @foreach (Client aClient in Model.Clients)
+        {
+            <tr>
+                <td><a asp-controller="Client" asp-action="Client" asp-route-id="@aClient.ClientId">@aClient.Name</a></td>
+                <td>@aClient.PointOfContact</td>
+                <td>@aClient.Phone</td>
+            </tr>
+        }
+    }
+</table>
+
+

@@ -20,22 +20,24 @@ namespace MinVoiCe.Controllers
                 ProjectData.LoadProjects();
             }
 
-            DashboardViewModel dashboardViewModel = new DashboardViewModel();
+            DashboardViewModel dashboardViewModel = new DashboardViewModel(id);
 
             //refactor to include other items and pull them from viewbag
             dashboardViewModel.Clients = ClientData.GetAll();
             dashboardViewModel.Projects = ProjectData.GetAll();
+
             
-            if (id == 0)
+            if (id != 0)
             {
-                dashboardViewModel.Worktimes = WorktimeData.GetAll();
-                dashboardViewModel.CurrentProject = "Showing all Projects";
+                dashboardViewModel.Worktimes = WorktimeData.GetbyProjectID(id);
+                dashboardViewModel.DashboardTitle = ProjectData.GetbyID(id).Name;
+
             }
 
             else
             {
-                dashboardViewModel.Worktimes = WorktimeData.GetbyProjectID(id);
-                dashboardViewModel.CurrentProject = ProjectData.GetbyID(id).Name;
+                dashboardViewModel.Worktimes = WorktimeData.GetAll();
+                dashboardViewModel.DashboardTitle = "Showing all Projects";
             }
 
             return View(dashboardViewModel);
@@ -46,6 +48,11 @@ namespace MinVoiCe.Controllers
         [HttpPost]
         public IActionResult Dashboard(DashboardViewModel dashboardViewModel)
         {
+            if (dashboardViewModel.ProjectId == 0)
+            {
+                return Redirect("/Project/AddProject");
+            }
+
             return Redirect("/?id=" + dashboardViewModel.ProjectId);
         }
 
@@ -73,7 +80,7 @@ namespace MinVoiCe.Controllers
                 newWorktime.Project = ProjectData.GetbyID(addTimeViewModel.ProjectId);
                 WorktimeData.Add(newWorktime);
 
-                return Redirect("/");
+                return Redirect("/?id="+addTimeViewModel.ProjectId);
             }
 
             return View("Addtime", addTimeViewModel);

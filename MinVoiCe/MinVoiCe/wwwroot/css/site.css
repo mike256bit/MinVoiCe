@@ -1,5 +1,7 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
+
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -7,31 +9,72 @@ body {
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
-.body-content {
+/*.body-content {
     padding-left: 15px;
     padding-right: 15px;
+}*/
+
+.panelWrapper {
+    position: relative;
+    width: 80%;
+    min-width: 400px;
+    margin: 0px auto;
+    /*border: 1px solid black;*/
+    top: 20px;
+    padding: 2px;
+    align-content: center;
+    box-sizing: content-box;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+.panelWrapper::after {
+    content: "";
+    clear: both;
+    display: table;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+.selectProject{
+    /*width: 90%;
+    margin: 0 auto;*/
+    border: 1px green solid;
+    border-radius: 5px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 0 10px 10px 10px;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+.projectPanel {
+    border: 1px solid green;
+    height: 400px;
+    width: 200px;
+    float: left;
+    padding: 25px 5px;
+    border-radius: 20px;    
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+.mainPanel {
+    padding-left: 20px; 
+    width: 70%;
+    min-width: 400px;
+    float: left;
+}
+
+.mainPanel td{
+    padding: 2px;
+}
+
+.okay {
+    border: 1px solid green;
+    font-size:60px;
+    line-height: 30px;
+    position:relative;
+    left:44%;
+    bottom: -30px;
+    height:60px; 
+    width:60px; 
+    border-radius:100%; 
+    color: green;
+}
+
+.worktime{
+    padding: 0 10px;
 }

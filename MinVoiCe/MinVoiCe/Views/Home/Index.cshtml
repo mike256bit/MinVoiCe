@@ -4,90 +4,96 @@
 @model MinVoiCe.ViewModels.DashboardViewModel
 
 
-<h1>Current Project: @Model.CurrentProject</h1>
-<form asp-controller="Home" asp-action="Dashboard" method="post">
-    Select Project Dashboard: <select asp-for="ProjectId" asp-items="Model.SelectProjects"></select><input type="submit" value="Change Project" />
-</form>
+<div class="panelWrapper">
 
-<h1>Clients</h1>
-This is a list of clients. Clicking one will send the user to the individual client page, which will have info about the client, address, POC, and a list of projects associated with that client.
-<br />
-<br />
+    <div class="projectPanel">
+        <div style="font-size: 20px; text-align: center; width: 100%; text-decoration:underline; margin-bottom: 10px;">Project Quick Panel</div>
 
-<table>
-    @if (Model.Clients.Count != 0)
-
-    {
-        <tr>
-            <th style="width: 200px;">Client Name</th>
-            <th style="width: 200px;">Point of Contact</th>
-            <th style="width: 200px;">Phone No.</th>
-        </tr>
-        @foreach (Client aClient in Model.Clients)
+        @if (Model.Projects.Count != 0)
         {
-            <tr>
-                <td><a asp-controller="Client" asp-action="Client" asp-route-id="@aClient.ClientId">@aClient.Name</a></td>
-                <td>@aClient.PointOfContact</td>
-                <td>@aClient.Phone</td>
-            </tr>
+            <ul>
+                @foreach (Project aProject in Model.Projects)
+                {
+                    <li><a href="/Project/Project?=@aProject.ProjectId">@aProject.Name</a></li>
+                }
+            </ul>
         }
-    }
-</table>
 
-<hr />
-<h1>Projects</h1>
-This is a list of projects. Clicking one will send the user to the individual project page, which will have info about the project and the hourly rate which applies.
-<br />
-<br />
+    </div>
 
-<table>
-    @if (Model.Projects.Count != 0)
+    <div class="mainPanel">
+        <div class="selectProject">
+            <h2>@Model.DashboardTitle</h2>
+            <form asp-controller="Home" asp-action="Dashboard" method="post">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 180px;">Change Project Dashboard:</td>
+                        <td> <select asp-for="ProjectId" asp-items="Model.SelectProjects" style="width: 100%;"></select> </td>
+                        <td style="width: 40px;"><input style="width: 100%;" type="submit" value="Go" /></td>
+                    </tr>
+                </table>
+            </form>
 
-    {
-        <tr>
-            <th style="width: 200px;">Project Name</th>
-            <th style="width: 200px;">Rate</th>
-        </tr>
-        @foreach (Project aProject in Model.Projects)
+        </div>
+
+        @if (Model.ProjectId != 0)
         {
-            <tr>
-                <td><a href="/Project/Project?=@aProject.ProjectId">@aProject.Name</a></td>
-                <td>@aProject.Rate</td>
-            </tr>
+        <div class="worktime">
+            <h3>Add Time:</h3>
+            <form asp-controller="Home" asp-action="Worktime" method="Post">
+
+                <div asp-validation-summary="All"></div>
+                <table style="border-bottom: 1px solid green; width: 100%;">
+                    <tr>
+                        <td>Hours</td>
+                        <td><input asp-for="Hours" /></td>
+                        <td>Date</td>
+                        <td><input style="width: 100%;" asp-for="Date" /></td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align:top;">Description</td>
+                        <td colspan="3"><textarea asp-for="Description" style="width: 100%; height: 40px;"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <input asp-for="ProjectId" type="hidden" />
+                            <input class="okay" type="submit" value="+" />
+                        </td>
+                    </tr>
+                </table>
+
+            </form>
+        </div>
         }
-    }
-</table>
+        
+        <div class="worktime">
+            <h3>Time Entries:</h3>
+            Currently unappended time entries.
+            <br />
 
-<hr />
-<h1>Time Entries</h1>
-This is a list of time entries. Time entries listed below have not been rolled into an invoice yet.
-<br />
-<br />
+            <table>
+                @if (Model.Worktimes.Count != 0)
 
-<table>
-    @if (Model.Worktimes.Count != 0)
+                {
+                    <tr>
+                        <th style="width: 200px;">Date</th>
+                        <th style="width: 200px;">Hours</th>
+                        <th style="width: 200px;">Description</th>
+                        <th style="width: 200px;">Project</th>
+                    </tr>
 
-    {
-        <tr>
-            <th style="width: 200px;">Date</th>
-            <th style="width: 200px;">Hours</th>
-            <th style="width: 200px;">Description</th>
-            <th style="width: 200px;">Project</th>
-        </tr>
+                    @foreach (Worktime aWorktime in Model.Worktimes)
+                    {
+                        <tr>
+                            <td>@aWorktime.Date</td>
+                            <td>@aWorktime.Hours</td>
+                            <td>@aWorktime.Description</td>
+                            <td>@aWorktime.Project.Name</td>
 
-        @foreach (Worktime aWorktime in Model.Worktimes)
-        {
-            <tr>
-                <td>@aWorktime.Date</td>
-                <td>@aWorktime.Hours</td>
-                <td>@aWorktime.Description</td>
-                <td>@aWorktime.Project.Name</td>
-
-            </tr>
-        }
-    }
-</table>
-
-<br />
-<br />
-<br />
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+</div>

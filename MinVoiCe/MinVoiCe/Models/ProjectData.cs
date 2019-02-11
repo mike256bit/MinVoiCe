@@ -48,6 +48,34 @@ namespace MinVoiCe.Models
 
         }
 
+        //SelectList with Current Project Removed
+        public static List<SelectListItem> SelectProjects(int id)
+        {
+            List<SelectListItem> SelectProjects = new List<SelectListItem>();
+
+            foreach (Project aProject in projectList)
+            {
+                    SelectProjects.Add(new SelectListItem
+                    {
+                        Value = aProject.ProjectId.ToString(),
+                        Text = aProject.Name,
+                        Selected = (aProject.ProjectId == id)
+                    });
+                          
+            }
+
+            SelectProjects.Add(new SelectListItem
+            {
+                Value = "0",
+                Text = "Add Project...",               
+
+            });
+
+            
+            return SelectProjects;
+
+        }
+
         //Load Dummy Projects:
         public static void LoadProjects()
         {
