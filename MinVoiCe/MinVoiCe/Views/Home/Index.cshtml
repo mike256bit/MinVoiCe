@@ -6,8 +6,8 @@
 
 <div class="panelWrapper">
 
-    <div class="projectPanel">
-        <div style="font-size: 20px; text-align: center; width: 100%; text-decoration:underline; margin-bottom: 10px;">Project Quick Panel</div>
+    <div class="projectPanel withShadow bluegreenBG">
+        <center><h2>Project Quick Panel</h2></center>
 
         @if (Model.Projects.Count != 0)
         {
@@ -22,14 +22,14 @@
     </div>
 
     <div class="mainPanel">
-        <div class="selectProject">
-            <h2>@Model.DashboardTitle</h2>
+        <div class="selectProject withShadow lightBG">
+            <h1>@Model.DashboardTitle</h1>
             <form asp-controller="Home" asp-action="Dashboard" method="post">
-                <table style="width: 100%;">
+                <table>
                     <tr>
-                        <td style="width:140px;">Change Dashboard:</td>
-                        <td><select asp-for="ProjectId" asp-items="Model.SelectProjects" style="width: 100%;"></select></td>
-                        <td style="width: 50px;"><input style="width: 100%;" type="submit" value="Go" /></td>
+                        <td class="selectLabel">Change Dashboard:</td>
+                        <td><select asp-for="ProjectId" asp-items="Model.SelectProjects"></select></td>
+                        <td><input class="bluegreenBG addProjButton" type="submit" value="Go" /></td>
                     </tr>
                 </table>
             </form>
@@ -38,13 +38,13 @@
 
         @if (Model.ProjectId != 0)
         {
-        <div class="worktime" style="border-bottom: 1px solid green; height: 180px;">
+        <div class="worktime addtime">
             <h3>Add Time:</h3>
             <div asp-validation-summary="All"></div>
             <form asp-controller="Home" asp-action="DashWorktime" method="Post">
 
                 <div asp-validation-summary="All"></div>
-                <table style="width: 100%;">
+                <table>
                     <tr>
                         <td>Hours</td>
                         <td><input asp-for="Hours" style="width: 60px;"></td>
@@ -57,7 +57,7 @@
                     </tr>
                 </table>
                 <input asp-for="ProjectId" type="hidden"/>
-                <button class="okay" type="submit">+</button>
+                <button class="addTimeButton bluegreenBG withGlow" type="submit"><p class="symbol">+</p></button>
             </form>
         </div>
         }

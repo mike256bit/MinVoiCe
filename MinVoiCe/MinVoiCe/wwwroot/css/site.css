@@ -5,21 +5,69 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: Calibri;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-/*.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}*/
+h1 {
+    font-size: 36px;
+    letter-spacing: 1.2px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+.bluegreenBG {
+    background-color: #5fe5e5;
+    color: #080d0d;
+    border: 1px solid #00091a;
+}
+
+.lightBG {
+    background-color: #cdebeb;
+    color: #080d0d;
+    border: 1px solid #00091a;
+}
+
+.projectPanel {
+    font-size: 16px;
+    height: 400px;
+    width: 200px;
+    float: left;
+    padding: 20px 10px 0 10px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.withShadow {
+    box-shadow: rgba(0,0,0,.45) -3px 3px 8px;
+}
+
+.withGlow {
+    box-shadow: rgb(82, 255, 238) 0 0 20px;
+}
+
+.projectPanel a {
+    color: darkslategray;
+}
 
 .panelWrapper {
     position: relative;
     width: 90%;
     min-width: 400px;
     margin: 0px auto;
-    /*border: 1px solid black;*/
     top: 20px;
     padding: 2px;
     align-content: center;
@@ -33,24 +81,32 @@ body {
 }
 
 .selectProject{
-    /*width: 90%;
-    margin: 0 auto;*/
-    border: 1px green solid;
     border-radius: 5px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    padding: 0 10px 10px 10px;
+    padding: 10px;
 }
 
-.projectPanel {
-    border: 1px solid green;
-    height: 400px;
-    width: 200px;
-    float: left;
-    padding: 25px 5px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    margin-right: 20px;
+.selectProject table{
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+
+.selectProject td {
+     padding: 0 2px;
+}
+
+.selectLabel {
+    width: 120px;
+}
+
+.selectProject select {
+    width: 100%;
+    float: right;
+}
+
+.addProjButton {
+    width: 100%;
 }
 
 .mainPanel {
@@ -60,25 +116,40 @@ body {
     float: left;
 }
 
-.mainPanel td{
-    padding: 2px;
-}
-
-.okay {
-    border: 1px solid green;
-    font-size:60px;
-    text-align:center;
-    line-height: 60px;
+.addTimeButton {
     position:relative;
     left: calc(50% - 30px); 
     height:60px; 
     width:60px; 
     border-radius:100%; 
-    color: green;
-    z-index: 3;
-    bottom: -7px;
+    color: inherit;
+    z-index: 1;
+    bottom: -8px;
 }
 
-.worktime{
+.symbol {
+    font-size: 70px;
+    text-align: center;
+    z-index: 2;
+    top:-24px;
+    position: relative;
+}
+
+.worktime {
     padding: 10px 10px 0;
+
+}
+
+.worktime td {
+    padding: 5px;
+}
+
+.addtime {
+    border-bottom: 1px solid #00091a;
+    height: 190px;
+}
+
+.addtime table {
+    width: 100%;
+
 }
