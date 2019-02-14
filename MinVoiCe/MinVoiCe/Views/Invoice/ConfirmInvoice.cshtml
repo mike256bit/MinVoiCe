@@ -1,0 +1,82 @@
+﻿@model MinVoiCe.ViewModels.ConfirmInvoiceViewModel
+
+
+<div style="width: 600px; margin: 0 auto;">
+    
+    <form asp-controller="Invoice" asp-action="Update" method="post">
+        <input type="hidden" asp-for="InvoiceId" value="@Model.InvoiceId" />
+
+
+        <div style="width: 100%; margin: 20px auto; text-align: justify;">
+            <table style="width: 200px; float: right;">
+                <tr>
+                    <td>INVOICE NO.</td>
+                    <td>@Model.InvoiceId</td>
+                </tr>
+                <tr>
+                    <td>DATE</td>
+                    <td>@Model.Invoice.CurrentDate</td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="width: 100%; margin: 20px auto; text-align: left;">
+            <strong>Mike Toth</strong><br />
+            Cooper St. Design<br />
+            WeWork C/O Mike Toth<br />
+            111 Street St.<br />
+            Miami Beach, FL 33139<br />
+            (123) 123 1234<br />
+        </div>
+
+        <div style="width: 100%; margin: 20px auto; text-align: left;">
+            <h3>BILL TO:</h3>
+            <strong>@Model.Invoice.Project.Client.PointOfContact</strong><br />
+            @Model.Invoice.Project.Client.Name<br />
+            @Model.Invoice.Project.Client.AddressStreet<br />
+            @Model.Invoice.Project.Client.AddressCityZip<br />
+            @Model.Invoice.Project.Client.EMail<br />
+            @Model.Invoice.Project.Client.Phone<br />
+        </div>
+
+        <div style="width: 100%; margin: 20px auto; border: 1px solid black; text-align: center;">
+            <table style="width:100%;">
+                <tr style="background-color: lightgreen; height: 30px;">
+                    <th style="width: calc(100%-200px);text-align: center;">Description</th>
+                    <th style="width: 100px;text-align: center;">Hours</th>
+                    <th style="width: 100px;text-align: center; position:relative;">Amount
+                        <div style="position: absolute; left: 110px; top:5px;">
+                            Remove
+                        </div></th>
+                </tr>
+                    @foreach (Worktime aWorktime in Model.Invoice.Worktimes)
+                    {
+                        <tr>
+                            <td>@string.Format("'{0}' thru period {1} at {2:C}/hr", @aWorktime.Description, @aWorktime.WeekRange, @Model.Invoice.Project.Rate)</td>
+                            <td><input style="width: 40px; margin: 2px;" value="@aWorktime.Hours" /></td>
+                            <td style="position: relative;">
+                                @string.Format("{0:C}", @aWorktime.Amount)
+                                <div style="position: absolute; right: -30px; top:5px;">
+                                    <input type="checkbox" 
+value="@aWorktime.WorktimeId" name="RemoveWorkTimeIDs" />
+                                </div>
+                            </td>
+                        </tr>
+                    }
+</table>
+        </div>
+
+        <div style="width: 100%; margin: 20px auto; text-align: center;">
+            <table style="width: 200px; float: right;">
+                <tr>
+                    <td><strong>Total Due</strong></td>
+                    <td><strong>@string.Format("{0:C}", @Model.Invoice.TotalAmount)</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <button class="addTimeButton bluegreenBG withGlow" type="submit">Update</button>
+
+    </form>
+    
+</div>

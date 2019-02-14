@@ -35,5 +35,5 @@ C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcor
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Client\Client.g.cshtml.cs
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Project\AddProject.g.cshtml.cs
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Project\Project.g.cshtml.cs
-C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Home\ConfirmInvoice.g.cshtml.cs
-C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Home\Invoice.g.cshtml.cs
+C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Invoice\ConfirmInvoice.g.cshtml.cs
+C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Invoice\Create.g.cshtml.cs

@@ -16,15 +16,18 @@ namespace MinVoiCe.Models
         public string CurrentDate { get; set; }
 
         //default constructor
-        public Invoice()
+        public Invoice(int id)
         {
             InvoiceId = nextId;
             nextId++;
             CurrentDate = DateTime.Today.ToString("d");
+            Project = ProjectData.GetbyID(id);
+            Worktimes = WorktimeData.GetbyProjectID(id);
         }
 
         public void Total()
         {
+            TotalAmount = 0;
             foreach (Worktime aWorktime in Worktimes)
             {
                 TotalAmount += aWorktime.Amount;

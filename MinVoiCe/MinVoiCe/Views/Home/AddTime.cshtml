@@ -1,17 +1,28 @@
 ﻿@model MinVoiCe.ViewModels.AddTimeViewModel
 
-<h1>Add Time</h1>
-<form asp-controller="Home" asp-action="Worktime" method="Post">
 
-    <div asp-validation-summary="All"></div>
-
-    Hours <input asp-for="Hours" /><br />
-    Date <select asp-for="WeekId" asp-items="Model.SelectWeeks"></select><br />
-    Description <textarea asp-for="Description"></textarea><br />
-    Project<br />
-    <select asp-for="ProjectId" asp-items="Model.SelectProjects"></select>
-
-    <input type="submit" value="Add Time" />
-
-
-</form>
+<div class="addTimeWrapper">
+    <div class="worktime addtime">
+        <form asp-controller="Home" asp-action="Worktime" method="Post">
+            <h3>Add Time:</h3>
+            <div asp-validation-summary="All"></div>
+            <table>
+                <tr>
+                    <td class="labelCell">Hours</td>
+                    <td class="hourInput"><input asp-for="Hours"></td>
+                    <td class="labelCell">Date</td>
+                    <td><select asp-for="WeekId" asp-items="Model.SelectWeeks"></select></td>
+                </tr>
+                <tr>
+                    <td class="labelCell">Description</td>
+                    <td colspan="3"><textarea asp-for="Description"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="labelCell">Project</td>
+                    <td colspan="3"><select asp-for="ProjectId" asp-items="Model.SelectProjects"></select></td>
+                </tr>
+            </table>
+            <button class="addTimeButton bluegreenBG withGlow" type="submit"><p class="symbol">+</p></button>
+        </form>
+    </div>
+</div>

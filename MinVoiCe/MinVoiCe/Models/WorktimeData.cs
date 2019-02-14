@@ -33,9 +33,9 @@ namespace MinVoiCe.Models
         {
             List<Worktime> ProjectWorktimes = new List<Worktime>();
 
-            foreach(Worktime aWorktime in WorktimeData.GetAll())
+            foreach(Worktime aWorktime in worktimeList)
             {
-                if (aWorktime.Project.ProjectId == id)
+                if (aWorktime.Project.ProjectId == id && aWorktime.IncludeInNextInvoice)
                 {
                     ProjectWorktimes.Add(aWorktime);
                 }

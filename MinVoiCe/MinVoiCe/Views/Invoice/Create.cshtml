@@ -3,7 +3,7 @@
 
 <h1>Create an Invoice</h1>
 
-<form asp-controller="Home" asp-action="ConfirmInvoice" method="post">
+<form asp-controller="Invoice" asp-action="Generator" method="post">
 
     <div asp-validation-summary="All"></div>
 
@@ -11,6 +11,7 @@
     <select asp-for="ProjectId" asp-items="Model.SelectProjects"></select>
 
     <input type="submit" value="Create Invoice" />
+    
 
 
 </form>

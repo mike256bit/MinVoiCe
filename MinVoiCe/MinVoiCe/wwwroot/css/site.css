@@ -1,24 +1,43 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 
+.navbar {
+    font-family: Calibri;
+    font-size: 14px;
+    padding: 0 20px;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    padding-right: 40px;
+}
 
 body {
-    padding-top: 50px;
+    padding-top: 60px;
     padding-bottom: 20px;
-    font-family: Calibri;
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+}
+
+li{
+    position: relative;
+    list-style-type: circle;
+    left: -10px;
 }
 
 h1 {
-    font-size: 36px;
-    letter-spacing: 1.2px;
-    margin: 0;
+    font-family: Calibri;
+    font-size: 30px;
+    margin: 5px 0 15px;
 }
 
 h2 {
+    font-family: Calibri;
     font-size: 20px;
-    margin: 0 0 10px 0;
-    font-weight: bolder;
-    text-decoration: underline;
+    margin: 0 0 5px 0;
+    background-color: darkslategray;
+    color: #cdebeb;
+    border-radius: 12px;
+    padding: 4px;
 }
 
 h3 {
@@ -42,7 +61,7 @@ h3 {
     height: 400px;
     width: 200px;
     float: left;
-    padding: 20px 10px 0 10px;
+    padding: 12px 10px 0 10px;
     border-radius: 20px;
     margin-bottom: 20px;
     margin-right: 20px;
@@ -105,8 +124,12 @@ h3 {
     float: right;
 }
 
-.addProjButton {
+.ProjButton {
     width: 100%;
+}
+
+.ProjButtonCell {
+    width: 50px;
 }
 
 .mainPanel {
@@ -117,21 +140,20 @@ h3 {
 }
 
 .addTimeButton {
-    position:relative;
+    position:absolute;
     left: calc(50% - 30px); 
     height:60px; 
     width:60px; 
     border-radius:100%; 
     color: inherit;
     z-index: 1;
-    bottom: -8px;
 }
 
 .symbol {
     font-size: 70px;
     text-align: center;
     z-index: 2;
-    top:-24px;
+    top:-25px;
     position: relative;
 }
 
@@ -146,10 +168,59 @@ h3 {
 
 .addtime {
     border-bottom: 1px solid #00091a;
-    height: 190px;
+    position: relative;
+    padding-bottom: 30px;
+
 }
 
 .addtime table {
     width: 100%;
+    margin-bottom: 10px;
 
+}
+
+.addtime .labelCell {
+    width: 80px;
+    font-weight: bold;
+    vertical-align: top;
+
+}
+
+.addtime .hourInput {
+    width: 50px;
+}
+
+.addtime input{
+    width: 100%;
+}
+
+.addtime textarea {
+    width: 100%;
+    height: 40px;
+}
+
+.worktime .tableHeader1{
+    width: 80px;
+}
+
+.worktime .tableHeader2 {
+    width: 120px;
+}
+
+.worktime th{
+    padding: 0 5px;
+}
+
+.worktime table{
+    width: 100%;
+}
+
+.worktime select {
+    width: 100%;
+}
+
+.addTimeWrapper{
+    width: 60%;
+    min-width: 340px;
+    margin: 0 auto;
 }

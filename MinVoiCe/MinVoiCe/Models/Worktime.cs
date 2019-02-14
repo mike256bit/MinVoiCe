@@ -15,12 +15,19 @@ namespace MinVoiCe.Models
         public string Description { get; set; }
         public Project Project { get; set; }
         public double Amount { get; set; }
+        public bool IncludeInNextInvoice { get; set; }
 
         //default constructor
         public Worktime()
         {
             WorktimeId = nextId;
             nextId++;
+            IncludeInNextInvoice = true;
+        }
+
+        public void ToggleInclude(bool state)
+        {
+            IncludeInNextInvoice = state;
         }
     }
 }

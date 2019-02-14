@@ -29,7 +29,7 @@
                     <tr>
                         <td class="selectLabel">Change Dashboard:</td>
                         <td><select asp-for="ProjectId" asp-items="Model.SelectProjects"></select></td>
-                        <td><input class="bluegreenBG addProjButton" type="submit" value="Go" /></td>
+                        <td class="ProjButtonCell"><input class="bluegreenBG ProjButton" type="submit" value="Go" /></td>
                     </tr>
                 </table>
             </form>
@@ -46,14 +46,14 @@
                 <div asp-validation-summary="All"></div>
                 <table>
                     <tr>
-                        <td>Hours</td>
-                        <td><input asp-for="Hours" style="width: 60px;"></td>
-                        <td>Date</td>
-                        <td><select asp-for="WeekId" asp-items="Model.SelectWeeks" style="width: 100%;"></select></td>
+                        <td class="labelCell">Hours</td>
+                        <td class="hourInput"><input asp-for="Hours"></td>
+                        <td class="labelCell">Date</td>
+                        <td><select asp-for="WeekId" asp-items="Model.SelectWeeks"></select></td>
                     </tr>
                     <tr>
-                        <td style="vertical-align:top;">Description</td>
-                        <td colspan="3"><textarea asp-for="Description" style="width: 100%; height: 40px;"></textarea></td>
+                        <td class="labelCell">Description</td>
+                        <td colspan="3"><textarea asp-for="Description"></textarea></td>
                     </tr>
                 </table>
                 <input asp-for="ProjectId" type="hidden"/>
@@ -66,17 +66,15 @@
             <h3>Time Entries:</h3>
             Currently unappended time entries.
             <br />
-            <br />
-
             <table>
                 @if (Model.Worktimes.Count != 0)
 
                 {
                     <tr>
-                        <th style="width: 200px;">Dates</th>
-                        <th style="width: 200px;">Hours</th>
-                        <th style="width: 200px;">Description</th>
-                        <th style="width: 200px;">Project</th>
+                        <th class="tableHeader2">Dates</th>
+                        <th class="tableHeader1">Hours</th>
+                        <th>Description</th>
+                        <th class="tableHeader2">Project</th>
                     </tr>
 
                     @foreach (Worktime aWorktime in Model.Worktimes)

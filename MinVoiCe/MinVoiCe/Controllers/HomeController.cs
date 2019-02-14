@@ -119,44 +119,6 @@ namespace MinVoiCe.Controllers
             return View("Addtime", addTimeViewModel);
         }
 
-        public IActionResult Invoice()
-        {
-            InvoiceViewModel invoiceViewModel = new InvoiceViewModel();
-
-            if (string.IsNullOrEmpty(invoiceViewModel.ProjectId.ToString()))
-            {
-                return Redirect("/");
-            }
-
-            return View(invoiceViewModel);
-        }
-
-        [HttpPost]
-        public IActionResult ConfirmInvoice(InvoiceViewModel invoiceViewModel)
-        {
-
-            if (ModelState.IsValid)
-            {
-                List<Worktime> ProjectWorktimes = WorktimeData.GetbyProjectID(invoiceViewModel.ProjectId);
-
-                if (ProjectWorktimes.Count == 0)
-                {
-                    return Redirect("/");
-                }
-
-                Invoice newInvoice = new Invoice();
-
-                newInvoice.Worktimes = ProjectWorktimes;
-                newInvoice.Project = ProjectData.GetbyID(invoiceViewModel.ProjectId);
-                newInvoice.Total();
-
-                return View(newInvoice);
-
-            }
-
-            return View("Invoice", invoiceViewModel);
-        }
-
     }
 
 }
