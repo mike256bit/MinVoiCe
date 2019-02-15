@@ -21,7 +21,7 @@ namespace MinVoiCe.Models
             InvoiceId = nextId;
             nextId++;
             CurrentDate = DateTime.Today.ToString("d");
-            Project = ProjectData.GetbyID(id);
+            //Project = ProjectData.GetbyID(id);
             Worktimes = WorktimeData.GetbyProjectID(id);
         }
 

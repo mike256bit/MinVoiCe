@@ -14,7 +14,6 @@ namespace MinVoiCe.Models
         //Generate weeks -- this should be it's own DB maybe? Naw.
         public static void WeekGenerator()
         {
-            //Dictionary<int, string> WeekDict = new Dictionary<int, string>();
 
             DateTime StartDate = new DateTime(2018, 12, 30);
             DateTime EndDate = StartDate.AddDays(6);

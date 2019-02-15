@@ -27,7 +27,7 @@ namespace MinVoiCe.Models
         //GetbyName
         public static Client GetbyID(int id)
         {
-            return clientList.Single(x => x.ClientId == id);
+            return clientList.Single(x => x.ClientID == id);
         }
 
         //Dummy Clients:

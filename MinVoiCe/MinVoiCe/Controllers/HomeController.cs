@@ -1,37 +1,48 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MinVoiCe.data;
 using MinVoiCe.Models;
 using MinVoiCe.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MinVoiCe.Controllers
 {
     public class HomeController : Controller
     {
+        //dbContext Setup
+        private MinvoiceDbContext context;
+        public HomeController (MinvoiceDbContext dbContext)
+        {
+            context = dbContext;
+        }
+        
         //Home/Index
         public IActionResult Index(int id)
         {
 
             if (ClientData.IsLoaded == false)
             {
-                ClientData.LoadClients();
+                //ClientData.LoadClients();
                 WeekNumber.WeekGenerator();
+                ClientData.IsLoaded = true;
             };
 
-            if (ProjectData.IsLoaded == false)
-            {
-                ProjectData.LoadProjects();
-            }
+            //if (ProjectData.IsLoaded == false)
+            //{
+            //    ProjectData.LoadProjects();
+            //}
 
-            DashboardViewModel dashboardViewModel = new DashboardViewModel(id);
+            DashboardViewModel dashboardViewModel = new DashboardViewModel(context.Projects.ToList(), id);
 
-            dashboardViewModel.Clients = ClientData.GetAll();
-            dashboardViewModel.Projects = ProjectData.GetAll();
-
-            
+            //dashboardViewModel.Clients = context.Clients.ToList();
+            //dashboardViewModel.Projects = context.Projects.Include(p => p.Client).ToList();
+                        
             if (id != 0)
             {
                 dashboardViewModel.Worktimes = WorktimeData.GetbyProjectID(id);
-                dashboardViewModel.DashboardTitle = ProjectData.GetbyID(id).Name;
+
+                dashboardViewModel.DashboardTitle = context.Projects.Single(p => p.ProjectID == id).Name;
             }
             else
             {
@@ -46,12 +57,12 @@ namespace MinVoiCe.Controllers
         [HttpPost]
         public IActionResult Dashboard(DashboardViewModel dashboardViewModel)
         {
-            if (dashboardViewModel.ProjectId == 0)
+            if (dashboardViewModel.ProjectID == 0)
             {
                 return Redirect("/Project/AddProject");
             }
 
-            return Redirect("/?id=" + dashboardViewModel.ProjectId);
+            return Redirect("/?id=" + dashboardViewModel.ProjectID);
         }
 
         //Home/AddTime
@@ -59,7 +70,7 @@ namespace MinVoiCe.Controllers
 
         public IActionResult AddTime()
         {
-            AddTimeViewModel addTimeViewModel = new AddTimeViewModel();
+            AddTimeViewModel addTimeViewModel = new AddTimeViewModel(context.Projects.ToList());
 
             return View(addTimeViewModel);
         }
@@ -76,11 +87,11 @@ namespace MinVoiCe.Controllers
                     Description = dashboardViewModel.Description
                 };
 
-                newWorktime.Project = ProjectData.GetbyID(dashboardViewModel.ProjectId);
+                newWorktime.Project = context.Projects.Single(p => p.ProjectID == dashboardViewModel.ProjectID);
                 newWorktime.Amount = newWorktime.Hours * (double)newWorktime.Project.Rate;
                 WorktimeData.Add(newWorktime);
 
-                return Redirect("/?id=" + dashboardViewModel.ProjectId);
+                return Redirect("/?id=" + dashboardViewModel.ProjectID);
             }
 
             AddTimeViewModel addTimeViewModel = new AddTimeViewModel
@@ -88,7 +99,7 @@ namespace MinVoiCe.Controllers
                 Hours = dashboardViewModel.Hours,
                 WeekId = dashboardViewModel.WeekId,
                 Description = dashboardViewModel.Description,
-                ProjectId = dashboardViewModel.ProjectId
+                ProjectId = dashboardViewModel.ProjectID
             };
 
             return View("Addtime", addTimeViewModel);
@@ -108,7 +119,7 @@ namespace MinVoiCe.Controllers
                     Description = addTimeViewModel.Description
                 };
 
-                newWorktime.Project = ProjectData.GetbyID(addTimeViewModel.ProjectId);
+                newWorktime.Project = context.Projects.Single(p => p.ProjectID == addTimeViewModel.ProjectId);
                 newWorktime.Amount = newWorktime.Hours * (double)newWorktime.Project.Rate;
                 WorktimeData.Add(newWorktime);
 

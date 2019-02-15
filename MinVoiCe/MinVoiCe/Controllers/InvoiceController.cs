@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MinVoiCe.data;
 using MinVoiCe.Models;
 using MinVoiCe.ViewModels;
 using System;
@@ -10,10 +11,16 @@ namespace MinVoiCe.Controllers
 {
     public class InvoiceController : Controller
     {
+        //dbContext Setup
+        private MinvoiceDbContext context;
+        public InvoiceController(MinvoiceDbContext dbContext)
+        {
+            context = dbContext;
+        }
 
         public IActionResult Create()
         {
-            InvoiceViewModel invoiceViewModel = new InvoiceViewModel();
+            InvoiceViewModel invoiceViewModel = new InvoiceViewModel(context.Projects.ToList());
 
             if (invoiceViewModel.SelectProjects.Count == 0)
             {

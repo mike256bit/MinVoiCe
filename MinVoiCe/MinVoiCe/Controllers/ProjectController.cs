@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MinVoiCe.data;
 using MinVoiCe.Models;
 using MinVoiCe.ViewModels;
 
@@ -10,6 +11,14 @@ namespace MinVoiCe.Controllers
 {
     public class ProjectController : Controller
     {
+
+        //dbContext Setup
+        private MinvoiceDbContext context;
+        public ProjectController(MinvoiceDbContext dbContext)
+        {
+            context = dbContext;
+        }
+
         //Send user to "add project" form
         public IActionResult AddProject()
         {
@@ -32,9 +41,11 @@ namespace MinVoiCe.Controllers
                     Rate = addProjectViewModel.Rate,
                 };
 
-                newProject.Client = ClientData.GetbyID(addProjectViewModel.ClientId);
+                //newProject.Client = ClientData.GetbyID(addProjectViewModel.ClientId);
 
-                ProjectData.Add(newProject);
+                context.Projects.Add(newProject);
+                context.SaveChanges();
+
                 ViewBag.SingleProject = newProject;
 
                 return View();
@@ -46,7 +57,7 @@ namespace MinVoiCe.Controllers
         [HttpGet]
         public IActionResult Project(int id)
         {
-            ViewBag.SingleProject = ProjectData.GetbyID(id);
+            ViewBag.SingleProject = context.Projects.Single(p => p.ProjectID == id);
 
             return View();
         }

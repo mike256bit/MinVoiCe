@@ -14,7 +14,7 @@
             <ul>
                 @foreach (Project aProject in Model.Projects)
                 {
-                    <li><a href="/Project/Project?=@aProject.ProjectId">@aProject.Name</a></li>
+                    <li><a href="/Project/Project?=@aProject.ProjectID">@aProject.Name</a></li>
                 }
             </ul>
         }
@@ -28,7 +28,7 @@
                 <table>
                     <tr>
                         <td class="selectLabel">Change Dashboard:</td>
-                        <td><select asp-for="ProjectId" asp-items="Model.SelectProjects"></select></td>
+                        <td><select asp-for="ProjectID" asp-items="Model.SelectProjects"></select></td>
                         <td class="ProjButtonCell"><input class="bluegreenBG ProjButton" type="submit" value="Go" /></td>
                     </tr>
                 </table>
@@ -36,7 +36,7 @@
 
         </div>
 
-        @if (Model.ProjectId != 0)
+        @if (Model.ProjectID != 0)
         {
         <div class="worktime addtime">
             <h3>Add Time:</h3>
@@ -56,7 +56,7 @@
                         <td colspan="3"><textarea asp-for="Description"></textarea></td>
                     </tr>
                 </table>
-                <input asp-for="ProjectId" type="hidden"/>
+                <input asp-for="ProjectID" type="hidden"/>
                 <button class="addTimeButton bluegreenBG withGlow" type="submit"><p class="symbol">+</p></button>
             </form>
         </div>

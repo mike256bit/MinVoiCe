@@ -23,10 +23,16 @@ namespace MinVoiCe.ViewModels
         public List<SelectListItem> SelectWeeks { get; set; }
 
         //Constructor
+
         public AddTimeViewModel()
         {
 
-            SelectProjects = ProjectData.SelectProjects();
+        }
+
+        public AddTimeViewModel(IList<Project> ProjectList)
+        {
+
+            SelectProjects = ProjectData.SelectProjects(ProjectList);
             SelectWeeks = WeekNumber.SelectWeeks();
             WeekId = WeekNumber.CurrentWeek;
 

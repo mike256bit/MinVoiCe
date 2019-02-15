@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MinVoiCe.data;
 using MinVoiCe.Models;
 using MinVoiCe.ViewModels;
 
@@ -10,12 +11,19 @@ namespace MinVoiCe.Controllers
 {
     public class ClientController : Controller
     {
+        //dbContext Setup
+        private MinvoiceDbContext context;
+        public ClientController(MinvoiceDbContext dbContext)
+        {
+            context = dbContext;
+        }
 
         //Send user to "add client" form
         public IActionResult AddClient()
         {
             AddClientViewModel addClientViewModel = new AddClientViewModel();
-            addClientViewModel.Clients = ClientData.GetAll();
+
+            addClientViewModel.Clients = context.Clients.ToList();
 
             return View(addClientViewModel);
         }
@@ -37,7 +45,8 @@ namespace MinVoiCe.Controllers
                     AddressCityZip = addClientViewModel.AddressCityZip
                 };
 
-                ClientData.Add(newClient);
+                context.Clients.Add(newClient);
+
                 ViewBag.SingleClient = newClient;
 
                 return View();
@@ -52,7 +61,7 @@ namespace MinVoiCe.Controllers
         public IActionResult Client(int id)
         {
 
-            ViewBag.SingleClient = ClientData.GetbyID(id);
+            ViewBag.SingleClient = context.Clients.Single(c => c.ClientID == id);
 
             return View();
         }

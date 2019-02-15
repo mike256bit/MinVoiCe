@@ -35,7 +35,7 @@
         @foreach (Client aClient in Model.Clients)
         {
             <tr>
-                <td><a asp-controller="Client" asp-action="Client" asp-route-id="@aClient.ClientId">@aClient.Name</a></td>
+                <td><a asp-controller="Client" asp-action="Client" asp-route-id="@aClient.ClientID">@aClient.Name</a></td>
                 <td>@aClient.PointOfContact</td>
                 <td>@aClient.Phone</td>
             </tr>
