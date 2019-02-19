@@ -21,12 +21,21 @@ namespace MinVoiCe.Controllers
 
         public IActionResult Create()
         {
-            InvoiceViewModel invoiceViewModel = new InvoiceViewModel(context.Projects.ToList());
+
+            IList<Project> withOpenTime = context.Projects
+                .Where(p => p.Worktimes.Count > 0)
+                .ToList();
+
+            InvoiceViewModel invoiceViewModel = new InvoiceViewModel(withOpenTime);
 
             if (invoiceViewModel.SelectProjects.Count == 0)
             {
                 return Redirect("/");
             }
+
+            invoiceViewModel.PreviousInvoices = context.Invoices
+                .Include(inv => inv.Project.Client)
+                .ToList();
 
             return View(invoiceViewModel);
         }
@@ -114,5 +123,16 @@ namespace MinVoiCe.Controllers
             return View("ConfirmInvoice", confirmInvoiceViewModel2);
 
         }
+
+        public IActionResult ViewInvoice(int id)
+        {
+            Invoice viewInvoice = context.Invoices
+                .Include(inv => inv.Project.Client)
+                .Include(inv => inv.Worktimes)
+                .Single(inv => inv.InvoiceID == id);
+
+            return View("ViewInvoice", viewInvoice);
+        }
+
     }
 }

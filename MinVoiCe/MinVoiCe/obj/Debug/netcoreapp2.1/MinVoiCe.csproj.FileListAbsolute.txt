@@ -30,10 +30,11 @@ C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\bin\Debug\netcor
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\bin\Debug\netcoreapp2.1\MinVoiCe.Views.pdb
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\MinVoiCe.Views.pdb
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\MinVoiCe.csproj.CopyComplete
-C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Home\AddTime.g.cshtml.cs
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Client\AddClient.g.cshtml.cs
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Client\Client.g.cshtml.cs
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Project\AddProject.g.cshtml.cs
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Project\Project.g.cshtml.cs
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Invoice\ConfirmInvoice.g.cshtml.cs
 C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Invoice\Create.g.cshtml.cs
+C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Time\AddTime.g.cshtml.cs
+C:\Users\miket\lc101\Unit4 - Liftoff\MinVoiCe\MinVoiCe\MinVoiCe\obj\Debug\netcoreapp2.1\Razor\Views\Invoice\ViewInvoice.g.cshtml.cs

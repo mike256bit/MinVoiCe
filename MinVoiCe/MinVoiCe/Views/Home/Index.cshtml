@@ -41,7 +41,7 @@
         <div class="worktime addtime">
             <h3>Add Time:</h3>
             <div asp-validation-summary="All"></div>
-            <form asp-controller="Home" asp-action="DashWorktime" method="Post">
+            <form asp-controller="Time" asp-action="DashWorktime" method="Post">
 
                 <div asp-validation-summary="All"></div>
                 <table>
@@ -63,32 +63,41 @@
         }
         
         <div class="worktime">
-            <h3>Time Entries:</h3>
-            Currently unappended time entries.
+            @if (Model.Worktimes.Count != 0)
+            {
+                <h3>Time Entries:</h3>
+                <p>Currently unappended time entries.</p>
             <br />
             <table>
-                @if (Model.Worktimes.Count != 0)
+                <tr>
+                    <th class="tableHeader2">Dates</th>
+                    <th class="tableHeader1">Hours</th>
+                    <th>Description</th>
+                    <th class="tableHeader2">Project</th>
+                </tr>
 
+                @foreach (Worktime aWorktime in Model.Worktimes)
                 {
                     <tr>
-                        <th class="tableHeader2">Dates</th>
-                        <th class="tableHeader1">Hours</th>
-                        <th>Description</th>
-                        <th class="tableHeader2">Project</th>
+                        <td>@aWorktime.WeekRange</td>
+                        <td>@aWorktime.Hours</td>
+                        <td>@aWorktime.Description</td>
+                        <td>@aWorktime.Project.Name</td>
+
                     </tr>
-
-                    @foreach (Worktime aWorktime in Model.Worktimes)
-                    {
-                        <tr>
-                            <td>@aWorktime.WeekRange</td>
-                            <td>@aWorktime.Hours</td>
-                            <td>@aWorktime.Description</td>
-                            <td>@aWorktime.Project.Name</td>
-
-                        </tr>
-                    }
                 }
+               
             </table>
+            }
+            else
+            {
+                <br />
+                <br />
+                <p>No time entries -- are you up to date?</p>
+            }
+
         </div>
     </div>
 </div>
+<br />
+<br />

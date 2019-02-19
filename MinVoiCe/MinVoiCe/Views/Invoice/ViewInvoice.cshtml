@@ -1,0 +1,62 @@
+﻿@model MinVoiCe.Models.Invoice
+
+<div style="width: 600px; margin: 0 auto;">
+    <div style="width: 100%; margin: 20px auto; text-align: justify;">
+        <table style="width: 200px; float: right;">
+            <tr>
+                <td>INVOICE NO.</td>
+                <td>@Model.InvoiceID</td>
+            </tr>
+            <tr>
+                <td>DATE</td>
+                <td>@Model.CurrentDate</td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="width: 100%; margin: 20px auto; text-align: left;">
+        <strong>Mike Toth</strong><br />
+        Cooper St. Design<br />
+        WeWork C/O Mike Toth<br />
+        111 Street St.<br />
+        Miami Beach, FL 33139<br />
+        (123) 123 1234<br />
+    </div>
+
+    <div style="width: 100%; margin: 20px auto; text-align: left;">
+        <h3>BILL TO:</h3>
+        <strong>@Model.Project.Client.PointOfContact</strong><br />
+        @Model.Project.Client.Name<br />
+        @Model.Project.Client.AddressStreet<br />
+        @Model.Project.Client.AddressCityZip<br />
+        @Model.Project.Client.EMail<br />
+        @Model.Project.Client.Phone<br />
+    </div>
+
+    <div style="width: 100%; margin: 20px auto; border: 1px solid black; text-align: center;">
+        <table style="width:100%;">
+            <tr style="background-color: lightgreen; height: 30px;">
+                <th style="width: calc(100%-200px);text-align: center;">Description</th>
+                <th style="width: 100px;text-align: center;">Hours</th>
+                <th style="width: 100px;text-align: center; position:relative;">Amount</th>
+            </tr>
+            @foreach (Worktime aWorktime in Model.Worktimes)
+            {
+                <tr>
+                    <td>@string.Format("'{0}' thru period {1} at {2:C}/hr", @aWorktime.Description, @aWorktime.WeekRange, @Model.Project.Rate)</td>
+                    <td>@aWorktime.Hours</td>
+                    <td>@string.Format("{0:C}", @aWorktime.Amount)</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div style="width: 100%; margin: 20px auto; text-align: center;">
+        <table style="width: 200px; float: right;">
+            <tr>
+                <td><strong>Total Due</strong></td>
+                <td><strong>@string.Format("{0:C}", @Model.TotalAmount)</strong></td>
+            </tr>
+        </table>
+    </div>
+</div>

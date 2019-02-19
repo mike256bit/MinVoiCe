@@ -1,46 +1,69 @@
 ﻿@model MinVoiCe.ViewModels.AddClientViewModel
 
-<h1>Add Client</h1>
 
-<form asp-controller="Client" asp-action="Client" method="post">
+<div class="addTimeWrapper">
+    <div class="worktime addtime">
+        <form asp-controller="Client" asp-action="Client" method="post">
+            <h3>Add Client:</h3>
+            <div asp-validation-summary="All"></div>
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input asp-for="Name"></td>
+                </tr>
+                <tr>
+                    <td>Point of Contact</td>
+                    <td><input asp-for="PointOfContact"></td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td><input asp-for="Phone" /></td>
+                </tr>
+                <tr>
+                    <td>E-Mail</td>
+                    <td><input asp-for="EMail" /></td>
+                </tr>
+                <tr>
+                    <td>Address (Line 1)</td>
+                    <td><input asp-for="AddressStreet" /></td>
+                </tr>
+                <tr>
+                    <td> Address (Line 2)</td>
+                    <td><input asp-for="AddressCityZip" /></td>
+                </tr>
+            </table>
+            <br />
 
-    <div asp-validation-summary="All"></div>
+            <button class="addTimeButton bluegreenBG withGlow" type="submit"><p class="symbol">+</p></button>
+        </form>
+    </div>
 
-    Name <input asp-for="Name"><br />
-    Point of Contact <input asp-for="PointOfContact"><br />
-    Phone <input asp-for="Phone" /><br />
-    E-Mail <input asp-for="EMail" /><br />
-    Address (Line 1) <input asp-for="AddressStreet" /><br />
-    Address (Line 2) <input asp-for="AddressCityZip" /><br />
-
-    <input type="submit" value="Add Client" />
-
-</form>
-
-<h1>Clients</h1>
-        This is a list of clients. Clicking one will send the user to the individual client page, which will have info about the client, address, POC, and a list of projects associated with that client.
-<br />
-<br />
-<hr />
-
-<table>
-    @if (Model.Clients.Count != 0)
-
-    {
-        <tr>
-            <th style="width: 200px;">Client Name</th>
-            <th style="width: 200px;">Point of Contact</th>
-            <th style="width: 200px;">Phone No.</th>
-        </tr>
-        @foreach (Client aClient in Model.Clients)
+    <div class="worktime">
+        @if (Model.Clients.Count != 0)
         {
-            <tr>
-                <td><a asp-controller="Client" asp-action="Client" asp-route-id="@aClient.ClientID">@aClient.Name</a></td>
-                <td>@aClient.PointOfContact</td>
-                <td>@aClient.Phone</td>
-            </tr>
+            <h3>Clients:</h3>
+            <table>
+
+                <tr>
+                    <th style="width: 200px;">Client Name</th>
+                    <th style="width: 200px;">Point of Contact</th>
+                    <th>Phone No.</th>
+                </tr>
+                @foreach (Client aClient in Model.Clients)
+                {
+                    <tr>
+                        <td><a asp-controller="Client" asp-action="Client" asp-route-id="@aClient.ClientID">@aClient.Name</a></td>
+                        <td>@aClient.PointOfContact</td>
+                        <td>@aClient.Phone</td>
+                    </tr>
+                }
+
+            </table>
+
         }
-    }
-</table>
+    </div>
+</div>
+
+
 
 

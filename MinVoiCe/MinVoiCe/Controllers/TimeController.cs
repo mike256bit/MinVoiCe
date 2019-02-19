@@ -1,75 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using MinVoiCe.data;
 using MinVoiCe.Models;
 using MinVoiCe.ViewModels;
-using System.Collections.Generic;
-using System.Linq;
+
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MinVoiCe.Controllers
 {
-    public class HomeController : Controller
+    public class TimeController : Controller
     {
         //dbContext Setup
         private MinvoiceDbContext context;
-        public HomeController (MinvoiceDbContext dbContext)
+        public TimeController(MinvoiceDbContext dbContext)
         {
             context = dbContext;
-        }
-        
-        //Home/Index
-        public IActionResult Index(int id)
-        {
-            //Initialize week number generator
-            if (WeekNumber.IsLoaded == false)
-            {
-                WeekNumber.WeekGenerator();
-                WeekNumber.IsLoaded = true;
-            };
-
-            DashboardViewModel dashboardViewModel = new DashboardViewModel(context.Projects.ToList(), id);
-                       
-            if (id != 0)
-            {
-
-                dashboardViewModel.Worktimes = context.Worktimes
-                    .Where(w => w.ProjectID == id)
-                    .Where(w => w.OpenStatus == true)
-                    .Include(w => w.Project)
-                    .OrderBy(w => w.WeekRange)
-                    .ToList();
-
-                dashboardViewModel.DashboardTitle = context.Projects.Single(p => p.ProjectID == id).Name;
-            }
-
-            else
-            {
-                dashboardViewModel.Worktimes = context.Worktimes.Where(w => w.OpenStatus == true).OrderBy(w => w.Project.Name).ToList();
-                dashboardViewModel.DashboardTitle = "Showing all Projects";
-                
-                dashboardViewModel.SelectProjects.Add(new SelectListItem
-                    {
-                        Value = "0",
-                        Text = "Add Project...",
-                    });
-
-            }
-
-            return View(dashboardViewModel);
-        }
-
-
-        //Dashboard Change
-        [HttpPost]
-        public IActionResult Dashboard(DashboardViewModel dashboardViewModel)
-        {
-            if (dashboardViewModel.ProjectID == 0)
-            {
-                return Redirect("/Project/AddProject");
-            }
-
-            return Redirect("/?id=" + dashboardViewModel.ProjectID);
         }
 
         //Go to Add Time form
@@ -96,7 +44,7 @@ namespace MinVoiCe.Controllers
                     WeekRange = WeekNumber.WeekDict[dashboardViewModel.WeekId],
                     Description = dashboardViewModel.Description,
                     Project = newProject
-                    
+
                 };
 
                 newWorktime.Amount = newWorktime.Hours * (double)newWorktime.Project.Rate;
@@ -119,9 +67,9 @@ namespace MinVoiCe.Controllers
 
             addTimeViewModel.SelectProjects = SelectListGen.SelectProjects(context.Projects.ToList());
 
-            return View("Addtime", addTimeViewModel);
+            return View("AddTime", addTimeViewModel);
         }
-    
+
 
         [HttpPost]
         public IActionResult Worktime(AddTimeViewModel addTimeViewModel)
@@ -144,17 +92,13 @@ namespace MinVoiCe.Controllers
                 context.Worktimes.Add(newWorktime);
                 context.SaveChanges();
 
-                return Redirect("/?id="+addTimeViewModel.ProjectID);
+                return Redirect("/?id=" + addTimeViewModel.ProjectID);
             }
 
             addTimeViewModel.SelectProjects = SelectListGen.SelectProjects(context.Projects.ToList());
 
-            return View("Addtime", addTimeViewModel);
+            return View("AddTime", addTimeViewModel);
         }
 
     }
-
 }
-
-
-        

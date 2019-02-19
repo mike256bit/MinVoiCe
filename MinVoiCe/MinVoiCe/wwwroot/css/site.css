@@ -139,9 +139,20 @@ h3 {
     float: left;
 }
 
+.invoiceUpdate {
+    transform: translateX(-40px);
+    margin-top: 30px;
+    z-index: 3;
+}
+
+.invoiceConfirm {
+    transform: translateX(40px);
+    margin-top: 30px;
+}
+
 .addTimeButton {
     position:absolute;
-    left: calc(50% - 30px); 
+    left: calc(50% - 30px);
     height:60px; 
     width:60px; 
     border-radius:100%; 

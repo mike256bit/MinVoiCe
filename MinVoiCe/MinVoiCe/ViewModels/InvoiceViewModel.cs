@@ -10,6 +10,7 @@ namespace MinVoiCe.ViewModels
     {
 
         public int ProjectID { get; set; }
+        public IList<Invoice> PreviousInvoices { get; set; }
 
         public List<SelectListItem> SelectProjects { get; set; }
 
