@@ -13,15 +13,11 @@ namespace MinVoiCe.Models
         public string WeekRange { get; set; }
         public string Description { get; set; }
         public double Amount { get; set; }
-        public bool IncludeInNextInvoice { get; set; }
+        public bool OpenStatus { get; set; }
 
         public int ProjectID { get; set; }
         public Project Project { get; set; }
 
-        public void ToggleInclude(bool state)
-        {
-            IncludeInNextInvoice = state;
-        }
     }
 }
 

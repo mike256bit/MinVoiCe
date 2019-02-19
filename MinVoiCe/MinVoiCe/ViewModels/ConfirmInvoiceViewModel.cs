@@ -9,7 +9,7 @@ namespace MinVoiCe.ViewModels
 {
     public class ConfirmInvoiceViewModel
     {
-        public int InvoiceId { get; set; }
+        public int InvoiceID { get; set; }
         public Invoice Invoice { get; set; }
 
         public ConfirmInvoiceViewModel()
@@ -20,7 +20,7 @@ namespace MinVoiCe.ViewModels
         public ConfirmInvoiceViewModel(Invoice anInvoice)
         {
             Invoice = anInvoice;
-            InvoiceId = anInvoice.InvoiceId;
+            InvoiceID = anInvoice.InvoiceID;
         }
     }
 }

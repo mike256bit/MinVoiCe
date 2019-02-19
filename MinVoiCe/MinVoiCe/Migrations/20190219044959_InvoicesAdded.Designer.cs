@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MinVoiCe.data;
 
 namespace MinVoiCe.Migrations
 {
     [DbContext(typeof(MinvoiceDbContext))]
-    partial class MinvoiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190219044959_InvoicesAdded")]
+    partial class InvoicesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,9 +96,9 @@ namespace MinVoiCe.Migrations
 
                     b.Property<double>("Hours");
 
-                    b.Property<int?>("InvoiceID");
+                    b.Property<bool>("IncludeInNextInvoice");
 
-                    b.Property<bool>("OpenStatus");
+                    b.Property<int?>("InvoiceID");
 
                     b.Property<int>("ProjectID");
 

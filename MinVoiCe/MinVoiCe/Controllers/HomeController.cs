@@ -94,9 +94,11 @@ namespace MinVoiCe.Controllers
                     WeekRange = WeekNumber.WeekDict[dashboardViewModel.WeekId],
                     Description = dashboardViewModel.Description,
                     Project = newProject
+                    
                 };
 
                 newWorktime.Amount = newWorktime.Hours * (double)newWorktime.Project.Rate;
+                newWorktime.OpenStatus = true;
 
                 context.Worktimes.Add(newWorktime);
                 context.SaveChanges();

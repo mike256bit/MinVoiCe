@@ -14,6 +14,11 @@ namespace MinVoiCe.ViewModels
         public List<SelectListItem> SelectProjects { get; set; }
 
         //Constructor
+        public InvoiceViewModel()
+        {
+
+        }
+
         public InvoiceViewModel(IList<Project> ProjectList)
         {
             SelectProjects = SelectListGen.SelectProjects(ProjectList);

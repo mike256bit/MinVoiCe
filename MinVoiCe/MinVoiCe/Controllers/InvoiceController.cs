@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MinVoiCe.data;
 using MinVoiCe.Models;
 using MinVoiCe.ViewModels;
@@ -36,16 +37,38 @@ namespace MinVoiCe.Controllers
 
             if (ModelState.IsValid)
             {
-                Invoice newInvoice = new Invoice(invoiceViewModel.ProjectID);
+                Project newProject = context.Projects
+                    .Include(p => p.Client)
+                    .Single(p => p.ProjectID == invoiceViewModel.ProjectID);
 
-                if (newInvoice.Worktimes.Count == 0)
+                Invoice newInvoice = new Invoice
+                {
+                    CurrentDate = DateTime.Today.ToString("d"),
+                    Project = newProject
+                };
+                
+                IList<Worktime> openWorktimes = context.Worktimes
+                    .Where(w => w.ProjectID == invoiceViewModel.ProjectID)
+                    .Where(w => w.OpenStatus == true)
+                    .Include(w => w.Project)
+                    .Include(w => w.Project.Client)
+                    .ToList();
+
+                if (openWorktimes.Count == 0)
                 {
                     return Redirect("/");
                 }
 
-                newInvoice.Total();
+                newInvoice.Worktimes = openWorktimes;
 
-                InvoiceData.Add(newInvoice);
+                foreach(Worktime aWorktime in openWorktimes)
+                {
+                    newInvoice.TotalAmount += aWorktime.Amount;
+                    aWorktime.OpenStatus = false;
+                }
+                 
+                context.Invoices.Add(newInvoice);
+                context.SaveChanges();
 
                 ConfirmInvoiceViewModel confirmInvoiceViewModel = new ConfirmInvoiceViewModel(newInvoice);
 
@@ -61,7 +84,10 @@ namespace MinVoiCe.Controllers
         {
             List<Worktime> RemoveList = new List<Worktime>();
 
-            Invoice updatedInvoice = InvoiceData.GetbyID(confirmInvoiceViewModel.InvoiceId);
+            Invoice updatedInvoice = context.Invoices
+                .Include(inv => inv.Project.Client)
+                .Include(inv => inv.Worktimes)
+                .Single(inv => inv.InvoiceID == confirmInvoiceViewModel.InvoiceID);
 
             foreach (int i in RemoveWorkTimeIDs)
             {
@@ -77,8 +103,11 @@ namespace MinVoiCe.Controllers
             foreach(Worktime aWorktime in RemoveList)
             {
                 updatedInvoice.Worktimes.Remove(aWorktime);
+                updatedInvoice.TotalAmount -= aWorktime.Amount;
+                aWorktime.OpenStatus = true;
             }
-            updatedInvoice.Total();
+
+            context.SaveChanges();
             
             ConfirmInvoiceViewModel confirmInvoiceViewModel2 = new ConfirmInvoiceViewModel(updatedInvoice);
 

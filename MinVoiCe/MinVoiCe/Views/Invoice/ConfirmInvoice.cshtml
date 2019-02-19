@@ -4,14 +4,14 @@
 <div style="width: 600px; margin: 0 auto;">
     
     <form asp-controller="Invoice" asp-action="Update" method="post">
-        <input type="hidden" asp-for="InvoiceId" value="@Model.InvoiceId" />
+        <input type="hidden" asp-for="InvoiceID" value="@Model.InvoiceID" />
 
 
         <div style="width: 100%; margin: 20px auto; text-align: justify;">
             <table style="width: 200px; float: right;">
                 <tr>
                     <td>INVOICE NO.</td>
-                    <td>@Model.InvoiceId</td>
+                    <td>@Model.InvoiceID</td>
                 </tr>
                 <tr>
                     <td>DATE</td>
@@ -75,6 +75,7 @@ value="@aWorktime.WorktimeID" name="RemoveWorkTimeIDs" />
             </table>
         </div>
 
+        <input type="hidden" asp-for="Invoice" value="@Model.Invoice" />
         <button class="addTimeButton bluegreenBG withGlow" type="submit">Update</button>
 
     </form>

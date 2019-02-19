@@ -11,6 +11,8 @@ namespace MinVoiCe.data
 
         public DbSet<Worktime> Worktimes { get; set; }
 
+        public DbSet<Invoice> Invoices { get; set; }
+
         public MinvoiceDbContext(DbContextOptions<MinvoiceDbContext> options) : base(options) { }
     }
 }

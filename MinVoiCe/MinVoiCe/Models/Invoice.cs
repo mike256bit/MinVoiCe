@@ -8,30 +8,20 @@ namespace MinVoiCe.Models
     public class Invoice
     {
 
-        private static int nextId = 1;
-        public int InvoiceId { get; set; }
-        public List<Worktime> Worktimes { get; set; }
+        public int InvoiceID { get; set; }
+        public int ProjectID { get; set; }
         public Project Project { get; set; }
         public double TotalAmount { get; set; }
         public string CurrentDate { get; set; }
 
-        //default constructor
-        public Invoice(int id)
-        {
-            InvoiceId = nextId;
-            nextId++;
-            CurrentDate = DateTime.Today.ToString("d");
-            //Project = ProjectData.GetbyID(id);
-            //Worktimes = WorktimeData.GetbyProjectID(id);
-        }
+        public IList<Worktime> Worktimes { get; set; }
 
-        public void Total()
-        {
-            TotalAmount = 0;
-            foreach (Worktime aWorktime in Worktimes)
-            {
-                TotalAmount += aWorktime.Amount;
-            }
-        }
     }
 }
+//CurrentDate = DateTime.Today.ToString("d");
+
+    //put totaling function outside of class:
+    //foreach (Worktime aWorktime in Worktimes)
+    //        {
+    //            TotalAmount += aWorktime.Amount;
+    //        }
