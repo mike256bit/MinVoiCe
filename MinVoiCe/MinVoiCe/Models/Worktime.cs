@@ -8,22 +8,15 @@ namespace MinVoiCe.Models
     public class Worktime
     {
 
-        private static int nextId = 1;
-        public int WorktimeId { get; set; }
+        public int WorktimeID { get; set; }
         public double Hours { get; set; }
         public string WeekRange { get; set; }
         public string Description { get; set; }
-        public Project Project { get; set; }
         public double Amount { get; set; }
         public bool IncludeInNextInvoice { get; set; }
 
-        //default constructor
-        public Worktime()
-        {
-            WorktimeId = nextId;
-            nextId++;
-            IncludeInNextInvoice = true;
-        }
+        public int ProjectID { get; set; }
+        public Project Project { get; set; }
 
         public void ToggleInclude(bool state)
         {

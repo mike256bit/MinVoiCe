@@ -9,7 +9,6 @@ namespace MinVoiCe.ViewModels
 {
     public class ConfirmInvoiceViewModel
     {
-        private static int nextId = 1;
         public int InvoiceId { get; set; }
         public Invoice Invoice { get; set; }
 

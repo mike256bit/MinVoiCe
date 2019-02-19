@@ -36,7 +36,7 @@ namespace MinVoiCe.Controllers
 
             if (ModelState.IsValid)
             {
-                Invoice newInvoice = new Invoice(invoiceViewModel.ProjectId);
+                Invoice newInvoice = new Invoice(invoiceViewModel.ProjectID);
 
                 if (newInvoice.Worktimes.Count == 0)
                 {
@@ -67,7 +67,7 @@ namespace MinVoiCe.Controllers
             {
                 foreach(Worktime aWorktime in updatedInvoice.Worktimes)
                 {
-                    if(aWorktime.WorktimeId == i)
+                    if(aWorktime.WorktimeID == i)
                     {
                         RemoveList.Add(aWorktime);
                     }

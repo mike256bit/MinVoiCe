@@ -22,7 +22,7 @@ namespace MinVoiCe.Models
             nextId++;
             CurrentDate = DateTime.Today.ToString("d");
             //Project = ProjectData.GetbyID(id);
-            Worktimes = WorktimeData.GetbyProjectID(id);
+            //Worktimes = WorktimeData.GetbyProjectID(id);
         }
 
         public void Total()

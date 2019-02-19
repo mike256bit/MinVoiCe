@@ -8,20 +8,15 @@ namespace MinVoiCe.ViewModels
 {
     public class InvoiceViewModel
     {
-        //dbContext Setup
-        private MinvoiceDbContext context;
-        public InvoiceViewModel(MinvoiceDbContext dbContext)
-        {
-            context = dbContext;
-        }
 
-        public int ProjectId { get; set; }
+        public int ProjectID { get; set; }
+
         public List<SelectListItem> SelectProjects { get; set; }
 
         //Constructor
         public InvoiceViewModel(IList<Project> ProjectList)
         {
-            SelectProjects = ProjectData.SelectProjects(ProjectList);
+            SelectProjects = SelectListGen.SelectProjects(ProjectList);
         }
     }
 }

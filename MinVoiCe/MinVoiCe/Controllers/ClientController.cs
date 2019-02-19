@@ -46,6 +46,7 @@ namespace MinVoiCe.Controllers
                 };
 
                 context.Clients.Add(newClient);
+                context.SaveChanges();
 
                 ViewBag.SingleClient = newClient;
 

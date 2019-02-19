@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MinVoiCe.data;
 using MinVoiCe.Models;
@@ -20,38 +21,42 @@ namespace MinVoiCe.Controllers
         //Home/Index
         public IActionResult Index(int id)
         {
-
-            if (ClientData.IsLoaded == false)
+            //Initialize week number generator
+            if (WeekNumber.IsLoaded == false)
             {
-                //ClientData.LoadClients();
                 WeekNumber.WeekGenerator();
-                ClientData.IsLoaded = true;
+                WeekNumber.IsLoaded = true;
             };
 
-            //if (ProjectData.IsLoaded == false)
-            //{
-            //    ProjectData.LoadProjects();
-            //}
-
             DashboardViewModel dashboardViewModel = new DashboardViewModel(context.Projects.ToList(), id);
-
-            //dashboardViewModel.Clients = context.Clients.ToList();
-            //dashboardViewModel.Projects = context.Projects.Include(p => p.Client).ToList();
-                        
+                       
             if (id != 0)
             {
-                dashboardViewModel.Worktimes = WorktimeData.GetbyProjectID(id);
+
+                dashboardViewModel.Worktimes = context.Worktimes
+                    .Where(w => w.ProjectID == id)
+                    .Include(w => w.Project).ToList();
 
                 dashboardViewModel.DashboardTitle = context.Projects.Single(p => p.ProjectID == id).Name;
             }
+
             else
             {
-                dashboardViewModel.Worktimes = WorktimeData.GetAll();
+                dashboardViewModel.Worktimes = context.Worktimes.ToList();
                 dashboardViewModel.DashboardTitle = "Showing all Projects";
+
+
+                dashboardViewModel.SelectProjects.Add(new SelectListItem
+                    {
+                        Value = "0",
+                        Text = "Add Project...",
+                    });
+
             }
 
             return View(dashboardViewModel);
         }
+
 
         //Dashboard Change
         [HttpPost]
@@ -65,12 +70,13 @@ namespace MinVoiCe.Controllers
             return Redirect("/?id=" + dashboardViewModel.ProjectID);
         }
 
-        //Home/AddTime
-
-
+        //Go to Add Time form
         public IActionResult AddTime()
         {
-            AddTimeViewModel addTimeViewModel = new AddTimeViewModel(context.Projects.ToList());
+            AddTimeViewModel addTimeViewModel = new AddTimeViewModel();
+
+            //Generate list of projects
+            addTimeViewModel.SelectProjects = SelectListGen.SelectProjects(context.Projects.ToList());
 
             return View(addTimeViewModel);
         }
@@ -80,27 +86,34 @@ namespace MinVoiCe.Controllers
         {
             if (ModelState.IsValid)
             {
+                Project newProject = context.Projects.Single(p => p.ProjectID == dashboardViewModel.ProjectID);
+
                 Worktime newWorktime = new Worktime
                 {
                     Hours = dashboardViewModel.Hours,
                     WeekRange = WeekNumber.WeekDict[dashboardViewModel.WeekId],
-                    Description = dashboardViewModel.Description
+                    Description = dashboardViewModel.Description,
+                    Project = newProject
                 };
 
-                newWorktime.Project = context.Projects.Single(p => p.ProjectID == dashboardViewModel.ProjectID);
                 newWorktime.Amount = newWorktime.Hours * (double)newWorktime.Project.Rate;
-                WorktimeData.Add(newWorktime);
+
+                context.Worktimes.Add(newWorktime);
+                context.SaveChanges();
 
                 return Redirect("/?id=" + dashboardViewModel.ProjectID);
             }
+
 
             AddTimeViewModel addTimeViewModel = new AddTimeViewModel
             {
                 Hours = dashboardViewModel.Hours,
                 WeekId = dashboardViewModel.WeekId,
                 Description = dashboardViewModel.Description,
-                ProjectId = dashboardViewModel.ProjectID
+                ProjectID = dashboardViewModel.ProjectID
             };
+
+            addTimeViewModel.SelectProjects = SelectListGen.SelectProjects(context.Projects.ToList());
 
             return View("Addtime", addTimeViewModel);
         }
@@ -112,20 +125,25 @@ namespace MinVoiCe.Controllers
 
             if (ModelState.IsValid)
             {
+                Project newProject = context.Projects.Single(p => p.ProjectID == addTimeViewModel.ProjectID);
+
                 Worktime newWorktime = new Worktime
                 {
                     Hours = addTimeViewModel.Hours,
                     WeekRange = WeekNumber.WeekDict[addTimeViewModel.WeekId],
-                    Description = addTimeViewModel.Description
+                    Description = addTimeViewModel.Description,
+                    Project = newProject
                 };
 
-                newWorktime.Project = context.Projects.Single(p => p.ProjectID == addTimeViewModel.ProjectId);
                 newWorktime.Amount = newWorktime.Hours * (double)newWorktime.Project.Rate;
-                WorktimeData.Add(newWorktime);
 
+                context.Worktimes.Add(newWorktime);
+                context.SaveChanges();
 
-                return Redirect("/?id="+addTimeViewModel.ProjectId);
+                return Redirect("/?id="+addTimeViewModel.ProjectID);
             }
+
+            addTimeViewModel.SelectProjects = SelectListGen.SelectProjects(context.Projects.ToList());
 
             return View("Addtime", addTimeViewModel);
         }

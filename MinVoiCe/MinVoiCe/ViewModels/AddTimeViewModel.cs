@@ -17,7 +17,7 @@ namespace MinVoiCe.ViewModels
         public int WeekId { get; set; }
         [Required]
         public string Description { get; set; }
-        public int ProjectId { get; set; }
+        public int ProjectID { get; set; }
 
         public List<SelectListItem> SelectProjects { get; set; }
         public List<SelectListItem> SelectWeeks { get; set; }
@@ -26,17 +26,8 @@ namespace MinVoiCe.ViewModels
 
         public AddTimeViewModel()
         {
-
-        }
-
-        public AddTimeViewModel(IList<Project> ProjectList)
-        {
-
-            SelectProjects = ProjectData.SelectProjects(ProjectList);
             SelectWeeks = WeekNumber.SelectWeeks();
             WeekId = WeekNumber.CurrentWeek;
-
         }
-
     }
 }

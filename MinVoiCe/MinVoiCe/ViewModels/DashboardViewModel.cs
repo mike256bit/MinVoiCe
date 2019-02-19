@@ -14,7 +14,7 @@ namespace MinVoiCe.ViewModels
         public int WeekId { get; set; }
 
         public IList<Project> Projects { get; set; }
-        public List<Worktime> Worktimes { get; set; }
+        public IList<Worktime> Worktimes { get; set; }
 
         //For dashboard view
         public string DashboardTitle { get; set; }
@@ -31,19 +31,16 @@ namespace MinVoiCe.ViewModels
         public List<SelectListItem> SelectWeeks { get; set; }
 
         //Default Constructor
-        //public DashboardViewModel()
-        //{
-
-        //    SelectProjects = ProjectData.SelectProjects();
-        //    DashboardTitle = "All Projects";
-        //    SelectWeeks = WeekNumber.SelectWeeks();
-
-        //}
-
-        public DashboardViewModel (IList<Project> Projects, int id)
+        public DashboardViewModel()
         {
 
-            SelectProjects = ProjectData.SelectProjects(Projects);
+        }
+
+        public DashboardViewModel (IList<Project> projects, int id)
+        {
+
+            Projects = projects;
+            SelectProjects = SelectListGen.SelectProjects(Projects);
             ProjectID = id;
             SelectWeeks = WeekNumber.SelectWeeks();
             WeekId = WeekNumber.CurrentWeek;

@@ -8,6 +8,7 @@ namespace MinVoiCe.Models
 {
     public class WeekNumber
     {
+        public static bool IsLoaded = false;
         public static Dictionary<int, string> WeekDict = new Dictionary<int, string>();
         public static int CurrentWeek = 0;
 

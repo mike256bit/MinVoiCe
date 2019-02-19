@@ -9,6 +9,8 @@ namespace MinVoiCe.data
 
         public DbSet<Project> Projects { get; set; }
 
+        public DbSet<Worktime> Worktimes { get; set; }
+
         public MinvoiceDbContext(DbContextOptions<MinvoiceDbContext> options) : base(options) { }
     }
 }

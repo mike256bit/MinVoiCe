@@ -11,12 +11,6 @@ namespace MinVoiCe.ViewModels
 {
     public class AddProjectViewModel
     {
-        //dbContext Setup
-        private MinvoiceDbContext context;
-        public AddProjectViewModel(MinvoiceDbContext dbContext)
-        {
-            context = dbContext;
-        }
 
         [Required]
         public string Name { get; set; }
@@ -32,12 +26,17 @@ namespace MinVoiCe.ViewModels
         public List<SelectListItem> SelectClients { get; set; }
 
         //Constructor
+
         public AddProjectViewModel()
         {
-            List<Client> Clients = context.Clients.ToList();
-            SelectClients = new List<SelectListItem>();
 
-            foreach (Client aClient in Clients)
+        }
+
+        public AddProjectViewModel(List<Client> clients)
+        {
+            //Generate dropdown for clients
+            SelectClients = new List<SelectListItem>();
+            foreach (Client aClient in clients)
             {
                 SelectClients.Add(new SelectListItem
                 {
