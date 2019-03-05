@@ -4,7 +4,8 @@
 <div class="addTimeWrapper">
     <div class="worktime addtime">
         <form asp-controller="Time" asp-action="Worktime" method="Post">
-            <h3>Add Time:</h3>
+            <h3>Add Time//</h3>
+            <hr />
             <div asp-validation-summary="All"></div>
             <table>
                 <tr>
@@ -22,7 +23,7 @@
                     <td colspan="3"><select asp-for="ProjectID" asp-items="Model.SelectProjects"></select></td>
                 </tr>
             </table>
-            <button class="addTimeButton bluegreenBG withGlow" type="submit"><p class="symbol">+</p></button>
+            <input type="image" src="~/images/add-button.png" style="width: 60px;" class="addButton withGlow" />
         </form>
     </div>
 </div>

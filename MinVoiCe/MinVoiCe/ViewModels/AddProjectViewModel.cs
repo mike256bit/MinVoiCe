@@ -19,11 +19,14 @@ namespace MinVoiCe.ViewModels
         public string Description { get; set; }
 
         [Required]
+        [Range(1, 999)]
         public float Rate { get; set; }
 
         public int ClientID { get; set; }
 
         public List<SelectListItem> SelectClients { get; set; }
+
+        public List<Project> Projects { get; set; }
 
         //Constructor
 

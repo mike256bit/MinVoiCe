@@ -9,14 +9,15 @@ namespace MinVoiCe.ViewModels
 {
     public class AddClientViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter a client name.")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a point of contact.")]
         public string PointOfContact { get; set; }
 
         [Required]
-        [Phone] //Lookup better phone validation techniques.
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$", ErrorMessage = "Not a valid phone number. (Ex: ###-###-####)")]
         public string Phone { get; set; }
 
         [Required]

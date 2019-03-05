@@ -2,7 +2,7 @@
 
 
 <div style="width: 600px; margin: 0 auto; position: relative;">
-    
+
     <form asp-controller="Invoice" asp-action="Update" method="post">
         <input type="hidden" asp-for="InvoiceID" value="@Model.InvoiceID" />
 
@@ -44,25 +44,27 @@
                 <tr style="background-color: lightgreen; height: 30px;">
                     <th style="width: calc(100%-200px);text-align: center;">Description</th>
                     <th style="width: 100px;text-align: center;">Hours</th>
-                    <th style="width: 100px;text-align: center; position:relative;">Amount
+                    <th style="width: 100px;text-align: center; position:relative;">
+                        Amount
                         <div style="position: absolute; left: 110px; top:5px;">
                             Remove
-                        </div></th>
+                        </div>
+                    </th>
                 </tr>
-                    @foreach (Worktime aWorktime in Model.Invoice.Worktimes)
-                    {
-                        <tr>
-                            <td>@string.Format("'{0}' thru period {1} at {2:C}/hr", @aWorktime.Description, @aWorktime.WeekRange, @Model.Invoice.Project.Rate)</td>
-                            <td><input style="width: 40px; margin: 2px;" value="@aWorktime.Hours" /></td>
-                            <td style="position: relative;">
-                                @string.Format("{0:C}", @aWorktime.Amount)
-                                <div style="position: absolute; right: -30px; top:5px;">
-                                    <input type="checkbox" value="@aWorktime.WorktimeID" name="RemoveWorkTimeIDs" />
-                                </div>
-                            </td>
-                        </tr>
-                    }
-</table>
+                @foreach (Worktime aWorktime in Model.Invoice.Worktimes)
+                {
+                    <tr>
+                        <td>@string.Format("'{0}' thru period {1} at {2:C}/hr", @aWorktime.Description, @aWorktime.WeekRange, @Model.Invoice.Project.Rate)</td>
+                        <td><input style="width: 40px; margin: 2px;" value="@aWorktime.Hours" /></td>
+                        <td style="position: relative;">
+                            @string.Format("{0:C}", @aWorktime.Amount)
+                            <div style="position: absolute; right: -30px; top:5px;">
+                                <input type="checkbox" value="@aWorktime.WorktimeID" name="RemoveWorkTimeIDs" />
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
         </div>
 
         <div style="width: 100%; margin: 20px auto; text-align: center;">
@@ -81,6 +83,11 @@
     <form asp-controller="Invoice" asp-action="ViewInvoice" asp-route-id="@Model.InvoiceID" method="post">
         <input type="hidden" asp-for="InvoiceID" value="@Model.InvoiceID" />
         <button class="addTimeButton invoiceConfirm bluegreenBG withGlow" type="submit">Confirm</button>
+    </form>
+
+    <form asp-controller="Invoice" asp-action="Cancel">
+        <input type="hidden" asp-for="InvoiceID" value="@Model.InvoiceID" />
+        <button class="addTimeButton invoiceCancel bluegreenBG withGlow" type="submit">Cancel</button>
     </form>
     
 </div>

@@ -22,7 +22,7 @@ namespace MinVoiCe.ViewModels
 
         //For Adding Time
         [Required]
-        [Range(.5, 100)]
+        [Range(.25, 100)]
         public double Hours { get; set; }
 
         [Required]
@@ -39,8 +39,8 @@ namespace MinVoiCe.ViewModels
         public DashboardViewModel (IList<Project> projects, int id)
         {
 
-            Projects = projects;
-            SelectProjects = SelectListGen.SelectProjects(Projects);
+            //Projects = projects;
+            SelectProjects = SelectListGen.SelectProjects(projects);
             ProjectID = id;
             SelectWeeks = WeekNumber.SelectWeeks();
             WeekId = WeekNumber.CurrentWeek;

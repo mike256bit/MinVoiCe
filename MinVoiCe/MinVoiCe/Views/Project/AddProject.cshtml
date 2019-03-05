@@ -1,17 +1,61 @@
 ﻿@model MinVoiCe.ViewModels.AddProjectViewModel
 
-<h1>Add Project</h1>
 
-<form asp-controller="Project" asp-action="Project" method="post">
+<div class="addTimeWrapper">
+    <div class="worktime addtime">
+        <form asp-controller="Project" asp-action="Project" method="post">
+            <h3>Add Project//</h3>
+            <hr />
+            <div asp-validation-summary="All"></div>
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input asp-for="Name"></td>
+                </tr>
+                <tr>
+                    <td>Rate</td>
+                    <td><input asp-for="Rate"></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td><textarea asp-for="Description"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Client</td>
+                    <td><select asp-for="ClientID" asp-items="Model.SelectClients"></select></td>
+                </tr>
 
-    <div asp-validation-summary="All"></div>
+            </table>
+            <br />
 
-    Name <input asp-for="Name"><br />
-    Rate <input asp-for="Rate"><br />
-    Description<br /> <textarea asp-for="Description"></textarea><br />
-    Client<br />
-    <select asp-for="ClientID" asp-items="Model.SelectClients"></select>
+            <input type="image" src="~/images/add-button.png" style="width: 60px;" class="addButton withGlow" />
 
-    <input type="submit" value="Add Project" />
+        </form>
+    </div>
 
-</form>
+    <div class="worktime">
+        @if (Model.Projects.Count != 0)
+        {
+            <img src="~/images/hammer.png" />
+            <h3>Projects//</h3>
+            <table>
+
+                <tr>
+                    <th style="width: 150px;">Project Name</th>
+                    <th>Client</th>
+                    <th style="width: 100px;">Hourly Rate</th>
+                </tr>
+                @foreach (Project aProject in Model.Projects)
+                {
+                    <tr>
+                        <td><a asp-controller="Project" asp-action="Project" asp-route-id="@aProject.ProjectID">@aProject.Name</a></td>
+                        <td>@aProject.Client.Name</td>
+                        <td>$@aProject.Rate</td>
+                    </tr>
+                }
+
+            </table>
+
+        }
+    </div>
+</div>

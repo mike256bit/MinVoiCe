@@ -41,6 +41,7 @@ namespace MinVoiCe.Controllers
                     .ToList();
 
                 dashboardViewModel.DashboardTitle = context.Projects.Single(p => p.ProjectID == id).Name;
+                ViewBag.SingleProject = context.Projects.Include(p => p.Client).Single(p => p.ProjectID == id);
             }
 
             else
@@ -55,7 +56,7 @@ namespace MinVoiCe.Controllers
                     });
 
             }
-
+            
             return View(dashboardViewModel);
         }
 

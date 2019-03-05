@@ -53,6 +53,8 @@ namespace MinVoiCe.Controllers
                 return View();
             }
 
+            addClientViewModel.Clients = context.Clients.ToList();
+
             return View("AddClient", addClientViewModel);
 
         }

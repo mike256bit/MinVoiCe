@@ -25,6 +25,8 @@ namespace MinVoiCe.Controllers
         {
             AddProjectViewModel addProjectViewModel = new AddProjectViewModel(context.Clients.ToList());
 
+            addProjectViewModel.Projects = context.Projects.ToList();
+
             return View(addProjectViewModel);
         }
 

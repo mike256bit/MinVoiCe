@@ -4,7 +4,8 @@
 <div class="addTimeWrapper">
     <div class="worktime addtime">
         <form asp-controller="Client" asp-action="Client" method="post">
-            <h3>Add Client:</h3>
+            <h3>Add Client//</h3>
+            <hr />
             <div asp-validation-summary="All"></div>
             <table>
                 <tr>
@@ -24,7 +25,7 @@
                     <td><input asp-for="EMail" /></td>
                 </tr>
                 <tr>
-                    <td>Address (Line 1)</td>
+                    <td style="width: 120px;">Address (Line 1)</td>
                     <td><input asp-for="AddressStreet" /></td>
                 </tr>
                 <tr>
@@ -34,20 +35,21 @@
             </table>
             <br />
 
-            <button class="addTimeButton bluegreenBG withGlow" type="submit"><p class="symbol">+</p></button>
+            <input type="image" src="~/images/add-button.png" style="width: 60px;" class="addButton withGlow" />
         </form>
     </div>
 
     <div class="worktime">
         @if (Model.Clients.Count != 0)
         {
-            <h3>Clients:</h3>
+            <img src="~/images/briefcase.png" />
+            <h3>Clients//</h3>
             <table>
 
                 <tr>
-                    <th style="width: 200px;">Client Name</th>
-                    <th style="width: 200px;">Point of Contact</th>
-                    <th>Phone No.</th>
+                    <th style="width: 150px;">Client Name</th>
+                    <th>Point of Contact</th>
+                    <th style="width: 100px;">Phone No.</th>
                 </tr>
                 @foreach (Client aClient in Model.Clients)
                 {

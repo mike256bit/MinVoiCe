@@ -22,9 +22,7 @@ namespace MinVoiCe.Controllers
         public IActionResult Create()
         {
 
-            IList<Project> withOpenTime = context.Projects
-                .Where(p => p.Worktimes.Count > 0)
-                .ToList();
+            IList<Project> withOpenTime = context.Projects.ToList();
 
             InvoiceViewModel invoiceViewModel = new InvoiceViewModel(withOpenTime);
 
@@ -122,6 +120,28 @@ namespace MinVoiCe.Controllers
 
             return View("ConfirmInvoice", confirmInvoiceViewModel2);
 
+        }
+
+        [HttpPost]
+        public IActionResult Cancel(ConfirmInvoiceViewModel confirmInvoiceViewModel)
+        {
+
+            Invoice RemoveInvoice = context.Invoices
+                .Include(inv => inv.Project.Client)
+                .Include(inv => inv.Worktimes)
+                .Single(inv => inv.InvoiceID == confirmInvoiceViewModel.InvoiceID);
+
+            List<Worktime> restoreTimes = RemoveInvoice.Worktimes.ToList();
+
+            foreach(Worktime aWorktime in restoreTimes)
+            {
+                aWorktime.OpenStatus = true;
+            }
+
+            context.Remove(RemoveInvoice);
+            context.SaveChanges();
+
+            return Redirect("/");
         }
 
         public IActionResult ViewInvoice(int id)

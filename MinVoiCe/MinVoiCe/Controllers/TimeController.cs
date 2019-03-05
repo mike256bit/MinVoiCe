@@ -88,6 +88,7 @@ namespace MinVoiCe.Controllers
                 };
 
                 newWorktime.Amount = newWorktime.Hours * (double)newWorktime.Project.Rate;
+                newWorktime.OpenStatus = true;
 
                 context.Worktimes.Add(newWorktime);
                 context.SaveChanges();

@@ -4,42 +4,44 @@
 @model MinVoiCe.ViewModels.DashboardViewModel
 
 
-<div class="panelWrapper">
-
-    <div class="projectPanel withShadow bluegreenBG">
-        <center><h2>Project Quick Panel</h2></center>
-
-        @if (Model.Projects.Count != 0)
-        {
-            <ul>
-                @foreach (Project aProject in Model.Projects)
-                {
-                    <li><a href="/Project/Project?=@aProject.ProjectID">@aProject.Name</a></li>
-                }
-            </ul>
-        }
-
-    </div>
-
     <div class="mainPanel">
-        <div class="selectProject withShadow lightBG">
-            <h1>@Model.DashboardTitle</h1>
+        <div class="projectPanel withShadow lightBG">
+            <h1>Dashboard: @Model.DashboardTitle//</h1>
             <form asp-controller="Home" asp-action="Dashboard" method="post">
                 <table>
                     <tr>
                         <td class="selectLabel">Change Dashboard:</td>
                         <td><select asp-for="ProjectID" asp-items="Model.SelectProjects"></select></td>
-                        <td class="ProjButtonCell"><input class="bluegreenBG ProjButton" type="submit" value="Go" /></td>
+                        <td class="ProjButtonCell"><input class="bluegreenBG projButton" type="submit" value="GO" /></td>
                     </tr>
                 </table>
             </form>
 
         </div>
 
+        <div class="projectPanel withShadow lightBG">
+            <img src="~/images/project-background.jpg">
+            @*<h1>Info Panel//</h1>*@
+
+            @if (Model.ProjectID != 0)
+            {
+                <span><strong>Project:</strong> @ViewBag.SingleProject.Name (@ViewBag.SingleProject.Client.Name) </span><br />
+                <span><strong>Rate:</strong> $@ViewBag.SingleProject.Rate/HR</span><br />
+                <span><strong>Description:</strong> @ViewBag.SingleProject.Description</span><br />
+                <span><strong>Hours allocated/Hours used:</strong> (0/100)</span>
+            }
+            else
+            {
+                <span>Select a project from the dropdown, or add a new project, to jump to that project's dashboard. Time entries can be made on the Project Dashboard or by clicking "Add Time" above.</span>
+            }
+
+        </div>
+
         @if (Model.ProjectID != 0)
         {
         <div class="worktime addtime">
-            <h3>Add Time:</h3>
+
+            <h3>Add Time//</h3>
             <div asp-validation-summary="All"></div>
             <form asp-controller="Time" asp-action="DashWorktime" method="Post">
 
@@ -56,38 +58,39 @@
                         <td colspan="3"><textarea asp-for="Description"></textarea></td>
                     </tr>
                 </table>
-                <input asp-for="ProjectID" type="hidden"/>
-                <button class="addTimeButton bluegreenBG withGlow" type="submit"><p class="symbol">+</p></button>
+                <input asp-for="ProjectID" type="hidden" />
+                <input type="image" src="~/images/add-button.png" style="width: 60px;" class="addButton withGlow" />
             </form>
         </div>
         }
-        
+
         <div class="worktime">
             @if (Model.Worktimes.Count != 0)
             {
-                <h3>Time Entries:</h3>
+                <img src="~/images/add-time-clock.png">
+                <h3>Time Entries//</h3>
                 <p>Currently unappended time entries.</p>
-            <br />
-            <table>
-                <tr>
-                    <th class="tableHeader2">Dates</th>
-                    <th class="tableHeader1">Hours</th>
-                    <th>Description</th>
-                    <th class="tableHeader2">Project</th>
-                </tr>
-
-                @foreach (Worktime aWorktime in Model.Worktimes)
-                {
+                <br />
+                <table>
                     <tr>
-                        <td>@aWorktime.WeekRange</td>
-                        <td>@aWorktime.Hours</td>
-                        <td>@aWorktime.Description</td>
-                        <td>@aWorktime.Project.Name</td>
-
+                        <th class="tableHeader2">Dates</th>
+                        <th class="tableHeader1">Hours</th>
+                        <th>Description</th>
+                        <th class="tableHeader2">Project</th>
                     </tr>
-                }
-               
-            </table>
+
+                    @foreach (Worktime aWorktime in Model.Worktimes)
+                    {
+                        <tr>
+                            <td>@aWorktime.WeekRange</td>
+                            <td>@aWorktime.Hours</td>
+                            <td>@aWorktime.Description</td>
+                            <td>@aWorktime.Project.Name</td>
+
+                        </tr>
+                    }
+
+                </table>
             }
             else
             {
@@ -98,6 +101,6 @@
 
         </div>
     </div>
-</div>
+
 <br />
 <br />
