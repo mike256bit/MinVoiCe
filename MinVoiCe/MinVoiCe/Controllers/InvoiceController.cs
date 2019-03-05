@@ -33,6 +33,7 @@ namespace MinVoiCe.Controllers
 
             invoiceViewModel.PreviousInvoices = context.Invoices
                 .Include(inv => inv.Project.Client)
+                .OrderByDescending(inv => inv.InvoiceID)
                 .ToList();
 
             return View(invoiceViewModel);

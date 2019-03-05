@@ -1,42 +1,60 @@
 ﻿@model MinVoiCe.ViewModels.InvoiceViewModel
 
 
-<h1>Create an Invoice</h1>
+<div class="addTimeWrapper">
+    <div class="projectPanel withShadow lightBG">
+        <h1>Create an Invoice//</h1>
 
-<form asp-controller="Invoice" asp-action="Generator" method="post">
+        <form asp-controller="Invoice" asp-action="Generator" method="post">
+            <div asp-validation-summary="All"></div>
 
-    <div asp-validation-summary="All"></div>
+            <p>Create an invoice using worktimes for the selected project:</p>
 
-    Create an invoice using worktimes for the selected project:<br />
-    <select asp-for="ProjectID" asp-items="Model.SelectProjects"></select>
+            <table>
+                <tr>
+                    <td>
+                        <select asp-for="ProjectID" asp-items="Model.SelectProjects"></select>
+                    </td>
+                    <td class="ProjButtonCell">
+                        <input class="bluegreenBG projButton" type="submit" value="CREATE" />
+                    </td>
+                </tr>
+            </table>
 
-    <input type="submit" value="Create Invoice" />
+        </form>
+    </div>
+
+    <div class="worktime">
+        @if (Model.PreviousInvoices.Count != 0)
+        {
+            <img src="~/images/invoice-doc.jpg" />
+            <h3>Previous Invoices//</h3>
+            <table>
+
+                <tr>
+                    <th style="width: 100px;">Invoice No.</th>
+                    <th style="width: 150px;">Client</th>
+                    <th>Project</th>
+                    <th style="width: 100px;">Date Created</th>
+                </tr>
+
+                @foreach (Invoice anInvoice in Model.PreviousInvoices)
+                {
+                    <tr>
+                        <td><a asp-controller="Invoice" asp-action="ViewInvoice" asp-route-id="@anInvoice.InvoiceID">@anInvoice.InvoiceID</a></td>
+                        <td>@anInvoice.Project.Client.Name</td>
+                        <td>@anInvoice.Project.Name</td>
+                        <td>@anInvoice.CurrentDate</td>
+                    </tr>
+                }
+
+            </table>
+
+        }
+    </div>
+
+</div>
+
     
 
-
-</form>
-
-<hr />
-<h3>Previous Invoices</h3>
-<table style=" width: 80%; margin: 0 auto;">
-    @if (Model.PreviousInvoices.Count != 0)
-
-    {
-        <tr>
-            <th>Invoice No.</th>
-            <th>Client</th>
-            <th>Project</th>
-            <th>Date Created</th>
-        </tr>
-
-        @foreach (Invoice anInvoice in Model.PreviousInvoices)
-        {
-            <tr>
-                <td><a asp-controller="Invoice" asp-action="ViewInvoice" asp-route-id="@anInvoice.InvoiceID">@anInvoice.InvoiceID</a></td>
-                <td>@anInvoice.Project.Client.Name</td>
-                <td>@anInvoice.Project.Name</td>
-                <td>@anInvoice.CurrentDate</td>
-            </tr>
-        }
-    }
-</table>
+    

@@ -1,7 +1,7 @@
 ﻿@model MinVoiCe.ViewModels.ConfirmInvoiceViewModel
 
 
-<div style="width: 600px; margin: 0 auto; position: relative;">
+<div style="width: 650px; margin: 0 auto; position: relative; border: 1px solid gray; padding: 40px;" class="withShadow">
 
     <form asp-controller="Invoice" asp-action="Update" method="post">
         <input type="hidden" asp-for="InvoiceID" value="@Model.InvoiceID" />
@@ -41,13 +41,13 @@
 
         <div style="width: 100%; margin: 20px auto; border: 1px solid black; text-align: center;">
             <table style="width:100%;">
-                <tr style="background-color: lightgreen; height: 30px;">
+                <tr style="background-color: #AEFFF6; height: 30px;">
                     <th style="width: calc(100%-200px);text-align: center;">Description</th>
                     <th style="width: 100px;text-align: center;">Hours</th>
                     <th style="width: 100px;text-align: center; position:relative;">
                         Amount
-                        <div style="position: absolute; left: 110px; top:5px;">
-                            Remove
+                        <div style="position: absolute; left: 108px; top:5px;">
+                            DEL
                         </div>
                     </th>
                 </tr>
@@ -58,7 +58,7 @@
                         <td><input style="width: 40px; margin: 2px;" value="@aWorktime.Hours" /></td>
                         <td style="position: relative;">
                             @string.Format("{0:C}", @aWorktime.Amount)
-                            <div style="position: absolute; right: -30px; top:5px;">
+                            <div style="position: absolute; right: -25px; top:5px;">
                                 <input type="checkbox" value="@aWorktime.WorktimeID" name="RemoveWorkTimeIDs" />
                             </div>
                         </td>
@@ -75,21 +75,26 @@
                 </tr>
             </table>
         </div>
+        <br />
+        <br />
+        <br />
 
-        <button class="addTimeButton invoiceUpdate bluegreenBG withGlow" type="submit">Update</button>
+        <input type="image" src="~/images/update-button.jpg" style="width: 60px;" class="addButton invoiceUpdate withGlow" title="Update" />
 
     </form>
 
     <form asp-controller="Invoice" asp-action="ViewInvoice" asp-route-id="@Model.InvoiceID" method="post">
         <input type="hidden" asp-for="InvoiceID" value="@Model.InvoiceID" />
-        <button class="addTimeButton invoiceConfirm bluegreenBG withGlow" type="submit">Confirm</button>
+
+        <input type="image" src="~/images/okay-button.jpg" style="width: 60px;" class="addButton invoiceConfirm withGlow" title="Confirm" />
+
     </form>
 
     <form asp-controller="Invoice" asp-action="Cancel">
         <input type="hidden" asp-for="InvoiceID" value="@Model.InvoiceID" />
-        <button class="addTimeButton invoiceCancel bluegreenBG withGlow" type="submit">Cancel</button>
+        <input type="image" src="~/images/cancel-button.jpg" style="width: 60px;" class="addButton invoiceCancel withGlow" title="Cancel" />
     </form>
-    
+
 </div>
 <br />
 <br />
