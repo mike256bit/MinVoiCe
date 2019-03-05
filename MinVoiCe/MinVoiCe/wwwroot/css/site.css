@@ -26,6 +26,11 @@ body {
     margin: 0 auto;
 }
 
+    .mainPanel a {
+    color: #676767;
+    font-weight: bold;
+}
+
 .projectPanel {
     padding: 10px;
     border-radius: 3px;
@@ -78,7 +83,7 @@ body {
 }
 
 .addtime {
-    border-bottom: 1px solid #00091a;
+    border-bottom: 1px solid #919191;
     padding-bottom: 30px;
 }
 
@@ -118,6 +123,11 @@ body {
     width: 60%;
     min-width: 340px;
     margin: 0 auto;
+}
+
+.addTimeWrapper a {
+    color: #676767;
+    font-weight: bold;
 }
 
 .worktime {
