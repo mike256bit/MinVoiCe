@@ -1,10 +1,15 @@
-﻿<h1>SINGLE CLIENT</h1>
-<h6><a href="/">(Home)</a></h6>
+﻿<div class="addTimeWrapper">
+    <div class="singleBox">
+        <img src="~/images/single-client-ref.jpg" />
 
-NAME: @ViewBag.SingleClient.Name<br />
-POC: @ViewBag.SingleClient.PointOfContact<br />
-PHONE: @ViewBag.SingleClient.Phone<br />
-EMAIL: @ViewBag.SingleClient.EMail<br />
-ADDRESS LINE 1: @ViewBag.SingleClient.AddressStreet<br />
-ADDRESS LINE 2: @ViewBag.SingleClient.AddressCityZip<br />
-
+        <strong>Name:</strong> @ViewBag.SingleClient.Name<br />
+        <strong>POC:</strong> @ViewBag.SingleClient.PointOfContact<br />
+        <strong>Phone:</strong> @ViewBag.SingleClient.Phone<br />
+        <strong>EMail:</strong> @ViewBag.SingleClient.EMail<br />
+        <strong>Address:</strong> @ViewBag.SingleClient.AddressStreet<br />
+        <span style="padding-left: 60px;">@ViewBag.SingleClient.AddressCityZip</span><br />
+        <br />
+        <strong>Notes:</strong> TBD<br /><br />
+        <h6><a href="/">(Home)</a></h6>
+    </div>
+</div>

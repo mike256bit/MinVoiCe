@@ -1,9 +1,13 @@
-﻿<h1>SINGLE PROJECT</h1>
-<h6><a href="/">(Home)</a></h6>
+﻿<div class="addTimeWrapper">
+    <div class="singleBox">
+        <img src="~/images/single-project-ref.png" />
 
-NAME: @ViewBag.SingleProject.Name<br />
-RATE: @ViewBag.SingleProject.Rate<br />
-DESCRIPTION: @ViewBag.SingleProject.Description<br />
+        <strong>Name:</strong> @ViewBag.SingleProject.Name<br />
+        <strong>Client:</strong> @ViewBag.SingleProject.Client.Name<br />
+        <strong>Rate:</strong> @ViewBag.SingleProject.Rate<br />
+        <strong>Description:</strong> @ViewBag.SingleProject.Description<br /><br />
 
-CLIENT: @ViewBag.SingleProject.Client.Name
-
+        <strong>Notes:</strong> TBD<br /><br />
+        <h6><a href="/">(Home)</a></h6>
+    </div>
+</div>

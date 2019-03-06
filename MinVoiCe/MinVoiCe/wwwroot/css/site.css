@@ -219,7 +219,7 @@ h3 {
 
 
 .invoiceConfirm {
-    transform: translateX(-80px);
+    transform: translateX(80px);
     
 }
 
@@ -228,8 +228,26 @@ h3 {
 }
 
 .invoiceCancel {
-    transform: translateX(80px);
+    transform: translateX(-80px);
 
+}
+
+.singleBox{
+    position: relative;
+    padding: 20px;
+    top: 100px;
+    float: left;
+    width: 50%;
+    min-width: 200px;
+    margin: 0 auto;
+    border-right: 1px #919191 solid;
+}
+
+.singleBox img {
+    position: absolute;
+    left: calc(100% + 40px);
+    opacity: .8;
+    width: 90%;
 }
 
 
